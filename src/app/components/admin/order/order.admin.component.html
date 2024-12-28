@@ -1,0 +1,102 @@
+<h1 class="text-4xl font-semibold text-center text-gray-800 mb-8">Quản lý đơn đặt hàng</h1>
+<div class="mx-auto px-4">
+  <div class="flex justify-center mb-6" style="margin-top: 30px; margin-left: 350px;">
+    <div class="w-full md:w-8/12 px-2" style="margin: auto;">
+      <input
+        class="search-input shadow rounded-lg w-full py-3 px-5 leading-tight focus:outline-none focus:ring-2 focus:ring-gold"
+        type="text" placeholder="Tìm kiếm Đơn Hàng" [(ngModel)]="keyword" />
+    </div>
+    <div class="w-full md:w-4/12 px-2">
+      <button class="search-button text-white font-semibold py-3 px-6 rounded-lg" (click)="searchOrders()">
+        <i class="fa fa-search"></i>
+      </button>
+    </div>
+  </div>
+  <div class="shadow-lg rounded-3xl bg-white p-8">
+
+    <table class="table-auto w-full border-collapse">
+      <thead>
+        <tr class="text-gray-600 bg-gray-100" style="background-color:  #5b5d8f; color: white; text-align: center;">
+          <th class="px-6 py-4 border">Mã đơn hàng</th>
+          <th class="px-6 py-4 border">Mã người dùng</th>
+          <th class="px-6 py-4 border">Tên người dùng</th>
+          <th class="px-6 py-4 border">Email</th>
+          <th class="px-6 py-4 border">Số điện thoại</th>
+          <th class="px-6 py-4 border">Địa chỉ</th>
+          <th class="px-6 py-4 border">Ghi chú</th>
+          <th class="px-6 py-4 border">Ngày đặt hàng</th>
+          <th class="px-6 py-4 border">Trạng thái</th>
+          <th class="px-6 py-4 border">Tổng tiền</th>
+          <th class="px-6 py-4 border">Thao tác</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (order of orders; track order.id) {
+        <tr class="text-gray-700 hover:bg-gray-50">
+          <td class="px-6 py-4 border">{{ order.id }}</td>
+          <td class="px-6 py-4 border">{{ order.user_id }}</td>
+          <td class="px-6 py-4 border">{{ order.fullname }}</td>
+          <td class="px-6 py-4 border">{{ order.email }}</td>
+          <td class="px-6 py-4 border">{{ order.phone_number }}</td>
+          <td class="px-6 py-4 border">{{ order.address }}</td>
+          <td class="px-6 py-4 border">{{ order.note }}</td>
+          <td class="px-6 py-4 border">{{ order.order_date | date }}</td>
+          <td class="px-6 py-4 border">{{ order.status }}</td>
+          <td class="px-6 py-4 border">{{ order.total_money | number: '1.0-2' }}</td>
+          <td class="px-6 py-4 border">
+            <div class="flex space-x-4 justify-center">
+              <button class="bg-gold hover:bg-gold-dark text-black font-bold py-2 px-4 rounded"
+                (click)="viewDetails(order)">
+                Xem chi tiết
+              </button>
+
+              <button
+                class="bg-gray-100 hover:bg-gray-300 text-white font-medium py-2 px-4 rounded flex items-center justify-center"
+                (click)="deleteOrder(order.id)">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#5b5d8f"
+                  class="h-5 w-5">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v2m4 0H7m10 0h-3" />
+                </svg>
+              </button>
+            </div>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+
+    <div class="d-flex justify-content-center">
+      <nav aria-label="Page navigation" style="margin: 10px;">
+        <ul class="pagination">
+          @if(currentPage > 0) {
+          <li class="page-item">
+            <a class="page-link" (click)="onPageChange(0)">First</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" (click)="onPageChange(currentPage - 1)">
+              <i class="fa fa-chevron-left"></i>
+            </a>
+          </li>
+          }
+          @for(page of visiblePages; track page) {
+          <ng-container>
+            <li class="page-item" [ngClass]="{'active': page === currentPage + 1}">
+              <a class="page-link" (click)="onPageChange(page - 1)">{{ page }}</a>
+            </li>
+          </ng-container>
+          }
+          @if(currentPage < totalPages - 1) { <li class="page-item">
+            <a class="page-link" (click)="onPageChange(currentPage + 1)">
+              <i class="fa fa-chevron-right"></i>
+            </a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" (click)="onPageChange(totalPages - 1)">Last</a>
+            </li>
+            }
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>

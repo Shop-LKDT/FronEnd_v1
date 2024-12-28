@@ -1,0 +1,41 @@
+<h1 class="text-3xl font-bold text-center mb-6">Quản lý người dùng</h1>
+<div class="container mx-auto px-6 py-8">
+  <div class="bg-dark-purple p-6 rounded-xl text-white shadow-lg">
+
+    <div class="shadow-lg rounded-3xl bg-white p-8">
+      <table class="table table-bordered table-striped">
+      <thead class="bg-gray-700">
+        <tr>
+          <th class="px-4 py-2 text-gray-300">Mã người dùng</th>
+          <th class="px-4 py-2 text-gray-300">Tên người dùng</th>
+          <th class="px-4 py-2 text-gray-300">Số điện thoại</th>
+          <th class="px-4 py-2 text-gray-300">Địa chỉ</th>
+          <th class="px-4 py-2 text-gray-300">Trạng thái</th>
+          <th class="px-4 py-2 text-gray-300">Quyền</th>
+          <th class="px-4 py-2 text-gray-300">Thao tác</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for(user of users; track user.id) {
+          <tr class="cursor-pointer transition ease-in-out hover:bg-gray-600">
+            <td class="border px-4 py-2">{{ user.id }}</td>
+            <td class="border px-4 py-2">{{ user.fullname }}</td>
+            <td class="border px-4 py-2">{{ user.phone_number }}</td>
+            <td class="border px-4 py-2">{{ user.address }}</td>
+            <td class="border px-4 py-2">{{ user.is_active ? 'Active' : 'Inactive' }}</td>
+            <td class="border px-4 py-2">{{ user.role.name }}</td>
+            <td class="border px-4 py-2">
+              <button class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 transition ease-in-out" (click)="toggleUserStatus(user)">
+                <i class="fas fa-ban"></i>
+              </button>
+              <button class="bg-blue-500 text-white font-bold py-1 px-3 rounded ml-2 hover:bg-blue-700 transition ease-in-out" (click)="resetPassword(user.id)">
+                Reset Password
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div>

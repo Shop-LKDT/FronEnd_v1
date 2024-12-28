@@ -1,0 +1,173 @@
+<h1 style="text-align: center;">BÀI VIẾT</h1>
+<hr>
+<br>
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="display: flex; flex-direction: row;">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <!-- <div style="margin-left: 500px;" class="form-inline">
+      <div class="form-group">
+        <input type="text" class="form-control" style="width: 500px;" placeholder="Tìm kiếm . . . . ." #searchName>
+      </div>
+      <button type="submit" class="btn btn-primary" style="background: #5b5d8f;"><i class="fa fa-search"></i></button>
+    </div> -->
+  </div>
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  <button class="btn btn-sm btn-success" style="padding: 5px; font-size: 15px; background:#5b5d8f; color:white; position: absolute; right: 0;"
+    (click)="openAddModal()">
+    THÊM BÀI VIẾT
+  </button>
+</div>
+<br>
+<br>
+<div class="shadow-lg rounded-3xl bg-white p-8">
+  <table class="table table-bordered table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Tiêu đề</th>
+        <th>Nội dung của bài viết</th>
+        <th>Ngày tạo bài viết</th>
+        <th>Trạng Thái</th>
+        <!-- <th><i class="ri-settings-5-fill"></i></th> -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let post of posts">
+        <td>{{ post.id }}</td>
+        <td>{{ post.title }}</td>
+        <td>{{ post.content }}</td>
+        <td>{{ post.created_at   }}</td>
+        <!-- <td>{{ post.isPublished ? 'Công khai' : 'Ngưng hoạt động' }}</td> -->
+        <td>
+          <a class="btn btn-sm" (click)="populateEditForm(post)" data-toggle="modal" data-target="#editPostModal">
+            <i class="ri-edit-2-line"></i>
+          </a>
+
+          |
+          <a class="btn btn-sm" (click)="openDeleteModal(post)" style="padding: 5px; font-size: 15px;">
+            <i class="ri-delete-bin-7-line"></i>
+          </a>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- <nav aria-label="Page navigation" class="mt-4">
+  <ul class="pagination justify-content-center">
+    <li class="page-item" [class.disabled]="currentPage === 1">
+      <a class="page-link" (click)="changePage(currentPage - 1)"> &laquo; </a>
+    </li>
+    <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index" [class.active]="i + 1 === currentPage">
+      <a class="page-link" (click)="changePage(i + 1)">{{ i + 1 }}</a>
+    </li>
+    <li class="page-item" [class.disabled]="currentPage === totalPages">
+      <a class="page-link" (click)="changePage(currentPage + 1)"> &raquo; </a>
+    </li>
+  </ul>
+</nav> -->
+
+<ng-template #nocates>
+  <p>Không có bài viết nào.</p>
+</ng-template>
+
+<!-- Modal Thêm Bài Viết -->
+<div *ngIf="isAddModalOpen" class="modal fade show" id="addCategoryModal" tabindex="-1" role="dialog" aria-labelledby="addCategoryLabel" aria-hidden="true" style="display: block;">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="addCategoryLabel">Thêm bài viết</h2>
+        <button type="button" class="close" (click)="closeAddModal()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="postForm" (ngSubmit)="addPost()">
+          <div class="form-group">
+            <label for="title">Tiêu đề</label>
+            <input formControlName="title" type="text" class="form-control" id="title" placeholder="Tiêu đề..." required>
+          </div>
+          <div class="form-group">
+            <label for="content">Nội dung</label>
+            <input formControlName="content" type="text" class="form-control" id="content" placeholder="Nội dung... " required>
+          </div>
+          <!-- <div class="form-group">
+            <label for="isPublished">Trạng thái</label>
+            <select class="form-control" id="isPublished" formControlName="isPublished" required>
+              <option value="">Chọn Trạng thái</option>
+              <option value="true">Công khai</option>
+              <option value="false">Ngưng hoạt động</option>
+            </select>
+          </div> -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="closeAddModal()">Đóng</button>
+            <button type="submit" class="btn btn-primary" style="background: #5b5d8f;">Thêm</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Xác Nhận Xóa -->
+<div *ngIf="isDeleteModalOpen" class="modal fade show" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true" style="display: block;">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="confirmDeleteLabel">Xác nhận xóa</h2>
+        <button type="button" class="close" (click)="closeDeleteModal()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h5>Bạn có chắc chắn muốn xóa bài viết này không?</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeDeleteModal()">Hủy</button>
+        <button type="button" class="btn btn-danger" (click)="deletePost()">Xóa</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="editPostModal" tabindex="-1" role="dialog" aria-labelledby="editPostModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="editPostModalLabel">Chỉnh sửa bài viết</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="editForm" (ngSubmit)="submitEdit()">
+          <div class="form-group">
+            <label for="title">Tiêu đề</label>
+            <input formControlName="title" type="text" class="form-control" id="title" placeholder="Tiêu đề..." required>
+          </div>
+          <div class="form-group">
+            <label for="content">Nội dung</label>
+            <textarea formControlName="content" class="form-control" id="content" placeholder="Nội dung..." required></textarea>
+          </div>
+          <!-- <div class="form-group">
+            <label for="isPublished">Trạng thái</label>
+            <select class="form-control" formControlName="isPublished" required>
+              <option [value]="true">Công khai</option>
+              <option [value]="false">Ngừng hoạt động</option>
+            </select>
+          </div> -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            <button type="submit" class="btn btn-primary">Lưu</button>
+          </div>
+          
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+

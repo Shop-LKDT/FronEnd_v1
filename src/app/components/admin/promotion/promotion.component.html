@@ -1,0 +1,173 @@
+<h1 style="text-align: center;">KHUYẾN MÃI</h1>
+<hr>
+<br>
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="display: flex; flex-direction: row;">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <!-- <div style="margin-left: 500px;" class="form-inline">
+      <div class="form-group">
+          <input type="text" class="form-control" style="width: 500px;" placeholder="Tìm kiếm . . . . ." #searchName>
+      </div>
+      <button type="submit" class="btn btn-primary" style="background: #5b5d8f;"><i class="fa fa-search"></i></button>
+    </div> -->
+  </div>
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  <a class="btn btn-sm btn-success" style="padding: 5px; font-size: 15px; background:#5b5d8f; color:white; position: absolute; right: 0;" data-toggle="modal" data-target="#addCategoryModal">
+    THÊM KHUYẾN MÃI
+  </a>
+</div>
+<br>
+<br>
+<div class="shadow-lg rounded-3xl bg-white p-8">
+  <table class="table table-bordered table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Mã KHUYẾN MÃI</th>
+        <th>Trạng thái</th>
+        <th>Giá trị (%)</th>
+        <th><i class="ri-settings-5-fill"></i></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let promotion of coupons">
+        <td>{{ promotion.id }}</td>
+        <td>{{ promotion.code }}</td>
+        <td>{{ promotion.active ? 'Hoạt động' : 'Ngừng' }}</td>
+        <td>{{ promotion.value }}</td>
+
+        <td>
+          <a class="btn btn-sm" data-toggle="modal" data-target="#editCategoryModal" (click)="openEditModal(promotion)">
+            <i class="ri-edit-2-line"></i>
+          </a>
+          |
+          <a class="btn btn-sm" data-toggle="modal" data-target="#confirmDeleteModal" (click)="openDeleteModal(promotion)" style="padding: 5px; font-size: 15px;">
+            <i class="ri-delete-bin-7-line" ></i>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- <nav aria-label="Page navigation" class="mt-4">
+  <ul class="pagination justify-content-center">
+    <li class="page-item" [class.disabled]="currentPage === 1">
+      <a class="page-link" (click)="changePage(currentPage - 1)"> &laquo; </a>
+    </li>
+    <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index" [class.active]="i + 1 === currentPage">
+      <a class="page-link" (click)="changePage(i + 1)">{{ i + 1 }}</a>
+    </li>
+    <li class="page-item" [class.disabled]="currentPage === totalPages">
+      <a class="page-link" (click)="changePage(currentPage + 1)"> &raquo; </a>
+    </li>
+  </ul>
+</nav> -->
+
+<ng-template #nocates>
+    <p>Không có KHUYẾN MÃI nào.</p>
+</ng-template>
+
+<div class="modal fade" id="addCategoryModal" tabindex="-1" role="dialog" aria-labelledby="addCategoryLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title" id="addCategoryLabel">Thêm KHUYẾN MÃI</h2>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="couponForm" (ngSubmit)="addCoupon()">
+            <div class="form-group">
+              <label for="title">Mã khuyến mãi</label>
+              <input formControlName="code" type="text" class="form-control" id="title" placeholder="Tiêu đề..." required>
+            </div>
+            <!-- giá trị -->
+            <div class="form-group">
+              <label for="title">Giá trị</label>
+              <input formControlName="value" type="text" class="form-control" id="title" placeholder="Giá trị..." required>
+            </div>
+            <div class="form-group">
+              <label for="isPublished">Trạng thái</label>
+              <select class="form-control" id="isPublished" formControlName="isPublished" required>
+                <option [value]="true">Hoạt động</option>
+              <option [value]="false">Không hoạt động</option>
+              </select>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="submit" class="btn btn-primary" style="background: #5b5d8f;" >Thêm</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- Modal Sửa Danh Mục -->
+<div class="modal fade" id="editCategoryModal" tabindex="-1" role="dialog" aria-labelledby="editCategoryLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title" id="editCategoryLabel">Sửa KHUYẾN MÃI</h2>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="couponForm" (ngSubmit)="updateCoupon()">
+              <div class="form-group">
+                <label for="title">Mã khuyến mãi</label>
+                <input formControlName="code" type="text" class="form-control" id="title" placeholder="Tiêu đề..." required>
+              </div>
+              <!-- giá trị -->
+              <div class="form-group
+              ">
+                <label for="title">Giá trị</label>
+                <input formControlName="value" type="text" class="form-control" id="title" placeholder="Giá trị..." required>
+              </div>
+              <div class="form-group
+              ">
+                <label for="isPublished">Trạng thái</label>
+                <select class="form-control" id="isPublished" formControlName="isPublished" required>
+                  <option [value]="true">Hoạt động</option>
+                <option [value]="false">Không hoạt động</option>
+                </select>
+              </div>
+
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                  <button type="submit" class="btn btn-primary" style="background: #5b5d8f;">Lưu</button>
+                </div>
+              </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title" id="confirmDeleteLabel">Xác nhận xóa</h2>
+          <button type="button" class="close" aria-label="Close" (click)="closeDeleteModal()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <h5>Bạn có chắc chắn muốn xóa mã khuyến mãi "{{ selectedCoupon?.code }}" không?</h5>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closeDeleteModal()">Hủy</button>
+          <button type="button" class="btn btn-danger" (click)="deleteCoupon()">Xóa</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+

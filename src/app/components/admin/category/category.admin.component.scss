@@ -1,0 +1,154 @@
+/* General Styles */
+body {
+    background-color: #f9f9f9; /* Tone nền nhã nhặn */
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  /* Search Input */
+  .search-input {
+    background-color: #ffffff;
+    color: #333333;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .search-input:focus {
+    border-color: #5b5d8f;
+    box-shadow: 0 0 5px rgba(91, 93, 143, 0.4);
+    outline: none;
+  }
+  
+  /* Search Button */
+  .search-button {
+    text-transform: uppercase;
+    background-color: #5b5d8f;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    transition: background-color 0.3s ease;
+  }
+  
+  .search-button:hover {
+    background-color: #1F2937;
+  }
+  
+  /* Table Styles */
+  .table {
+    width: 100%;
+    margin: 20px 0px;
+    font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+  }
+  
+  .table th {
+    background-color: #5b5d8f;
+    color: #ffffff;
+    text-transform: uppercase;
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+  
+  .table td {
+    background-color: #f9f9f9;
+    color: #333333;
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+  
+  .table tr:nth-child(even) {
+    background-color: #e7e7f2;
+  }
+  
+  .table tr:hover {
+    background-color: #d5d5eb;
+  }
+  
+  /* Headings */
+  h1 {
+    font-size: 30px;
+    font-weight: bold;
+    margin: 20px 0px;
+    color: #5b5d8f;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  
+  h2 {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px 0px;
+    color: #333333;
+    text-transform: uppercase;
+  }
+  
+  h5 {
+    font-size: 15px;
+    font-weight: bold;
+    margin: 5px 0px;
+    color: crimson;
+    text-transform: uppercase;
+  }
+  
+  /* Buttons */
+  .btn {
+    text-transform: uppercase;
+    background-color: #5b5d8f;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn:hover {
+    background-color: #1F2937;
+  }
+  
+  /* Pagination */
+  .page-link {
+    background-color: #5b5d8f;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    margin: 0 5px;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+  }
+  
+  .page-link:hover,
+  .page-link.active {
+    background-color: #1F2937;
+    color: #ffffff;
+  }
+  
+  /* Labels */
+  label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333333;
+    margin: 10px 0px;
+    display: block;
+  }
+  
+  /* Icons */
+  i {
+    font-size: 16px;
+    color: #ffffff;
+    transition: color 0.3s ease;
+  }
+  
+  i:hover {
+    color: #f1f1f1;
+  }
+  

@@ -1,0 +1,71 @@
+<h1 style="text-align: center;">BÌNH LUẬN</h1>
+<hr>
+<br>
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="display: flex; flex-direction: row;">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <!-- <div style="margin-left: 500px;" class="form-inline">
+      <div class="form-group">
+          <input  type="text" class="form-control" style="width:500px;" placeholder="Tìm kiếm . . . . ." #searchName>
+      </div>
+      <button type="submit" class="btn btn-primary" style="background: #5b5d8f;"><i class="fa fa-search"></i></button>
+    </div> -->
+  </div>
+  <!-- <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+    <a class="btn btn-sm btn-success" style="padding: 5px; font-size: 15px; background:#5b5d8f; color:white; position: absolute; right: 0;" data-toggle="modal" data-target="#addCategoryModal">
+      THÊM BÌNH LUẬN
+    </a>
+  </div> -->
+</div>
+<br>
+<div class="shadow-lg rounded-3xl bg-white p-8">
+  <table class="table table-bordered table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Họ Tên</th>
+        <th>Số Điện Thoại</th>
+        <th>Địa Chỉ</th>
+        <th>Ngày Sinh</th>
+        <th>Nội dung</th>
+        <!-- <th>Trạng Thái</th> -->
+        <th><i class="ri-settings-5-fill"></i></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cmt of comments">
+        <td>{{ cmt.user.id }}</td>
+        <td>{{ cmt.user.fullname }}</td>
+        <td>{{ cmt.user.phone_number }}</td>
+        <td>{{ cmt.user.address }}</td>
+        <td>{{ cmt.user.date_of_birth | date:'shortDate' }}</td> <!-- Sử dụng pipe date để định dạng -->
+        <td>{{ cmt.content }}</td>
+        <!-- <td>{{ cmt.user.active ? 'Kích hoạt' : 'Ngưng hoạt động' }}</td> -->
+        <td>
+          <a class="btn btn-sm" data-toggle="modal"
+          data-target="#editCategoryModal"><i class="ri-edit-2-line"></i></a>
+        |
+          <a class="btn btn-sm" data-toggle="modal"
+          data-target="#confirmDeleteModal" style="padding: 5px; font-size: 15px;" (click)="deleteComment(cmt.id)">
+          <i class="ri-delete-bin-7-line"></i></a>
+      </td>
+      </tr>
+    </tbody>
+  </table>
+
+<!-- <nav aria-label="Page navigation">
+  <ul class="pagination">
+    <li class="page-item" [class.disabled]="currentPage === 1">
+      <a class="page-link" (click)="changePage(currentPage - 1)"> &laquo; </a>
+    </li>
+
+    <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index"
+        [class.active]="i + 1 === currentPage">
+      <a class="page-link" (click)="changePage(i + 1)">{{ i + 1 }}</a>
+    </li>
+
+    <li class="page-item" [class.disabled]="currentPage === totalPages">
+      <a class="page-link" (click)="changePage(currentPage + 1)"> &raquo; </a>
+    </li>
+  </ul>
+</nav></div> -->

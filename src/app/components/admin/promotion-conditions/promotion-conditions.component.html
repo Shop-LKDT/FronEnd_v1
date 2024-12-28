@@ -1,0 +1,188 @@
+<h1>Điều kiện KHUYẾN MÃI</h1>
+<hr>
+<br>
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="display: flex; flex-direction: row;">
+  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+    <div class="form-inline">
+      <div class="form-group">
+          <input type="text" class="form-control" placeholder="Tìm kiếm . . . . ." #searchName>
+      </div>
+      <button type="submit" class="btn btn-primary" style="background: #5b5d8f;"><i class="fa fa-search"></i></button>
+    </div>
+  </div>
+  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+    <a class="btn btn-sm btn-success" style="padding: 5px; font-size: 15px; background:#5b5d8f; color:white; position: absolute; right: 0;" data-toggle="modal" data-target="#addCategoryModal">
+      THÊM điều kiện
+    </a>
+  </div>
+</div>
+<br>
+<div>
+  <table class="table">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Mã KHUYẾN MÃI</th>
+        <th>Đối tượng</th>
+        <th>Giá trị</th>
+        <th>Thuộc tính</th>
+        <th>Giá</th>
+        <th><i class="ri-settings-5-fill"></i></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let promotion of promotions">
+        <td>{{ promotion.id }}</td>
+        <td>{{ promotion.coupon_id }}</td>
+        <td>{{ promotion.operator }}</td>
+        <td>{{ promotion.value }}</td>
+        <td>{{ promotion.attribute }}</td>
+        <td>{{ promotion.discountAmount }}</td>
+        <td>
+          <a class="btn btn-sm" data-toggle="modal"
+          data-target="#editCategoryModal"><i class="ri-edit-2-line"></i></a>
+        |
+          <a class="btn btn-sm" data-toggle="modal"
+          data-target="#confirmDeleteModal" style="padding: 5px; font-size: 15px;">
+          <i class="ri-delete-bin-7-line"></i></a>
+      </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+    <li class="page-item" [class.disabled]="currentPage === 1">
+      <a class="page-link" (click)="changePage(currentPage - 1)"> &laquo; </a>
+    </li>
+
+    <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index"
+        [class.active]="i + 1 === currentPage">
+      <a class="page-link" (click)="changePage(i + 1)">{{ i + 1 }}</a>
+    </li>
+
+    <li class="page-item" [class.disabled]="currentPage === totalPages">
+      <a class="page-link" (click)="changePage(currentPage + 1)"> &raquo; </a>
+    </li>
+  </ul>
+</nav>
+
+<ng-template #nocates>
+    <p>Không có KHUYẾN MÃI nào.</p>
+</ng-template>
+
+<div class="modal fade" id="addCategoryModal" tabindex="-1" role="dialog" aria-labelledby="addCategoryLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title" id="addCategoryLabel">Thêm Điều kiện KHUYẾN MÃI</h2>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="coupon_id">Mã Khuyến mãi</label>
+              <select class="form-control" id="coupon_id" formControlName="coupon_id" required>
+                <option value="">Chọn Mã</option>
+                <option value="">Chọn Mã</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="value">Giá trị</label>
+              <input formControlName="value" type="text" class="form-control" id="value" placeholder="Giá trị..." required>
+            </div>
+            <div class="form-group">
+              <label for="operator">Đối tượng</label>
+              <input formControlName="operator" type="text" class="form-control" id="operator" placeholder="Đối tượng..." required>
+            </div>
+            <div class="form-group">
+              <label for="attribute">Thuộc tính</label>
+              <input formControlName="attribute" type="text" class="form-control" id="attribute" placeholder="Thuộc tính..." required>
+            </div>
+            <div class="form-group">
+              <label for="discountAmount">Giá khuyến mãi</label>
+              <input formControlName="discountAmount" type="text" class="form-control" id="discountAmount" placeholder="Giá khuyến mãi..." required>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="submit" class="btn btn-primary" style="background: #5b5d8f;">Thêm</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- Modal Sửa Danh Mục -->
+<div class="modal fade" id="editCategoryModal" tabindex="-1" role="dialog" aria-labelledby="editCategoryLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title" id="editCategoryLabel">Sửa KHUYẾN MÃI</h2>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="coupon_id">Mã Khuyến mãi</label>
+                <select class="form-control" id="coupon_id" formControlName="coupon_id" required>
+                  <option value="">Chọn Mã</option>
+                  <option value="">Chọn Mã</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="value">Giá trị</label>
+                <input formControlName="value" type="text" class="form-control" id="value" placeholder="Giá trị..." required>
+              </div>
+              <div class="form-group">
+                <label for="operator">Đối tượng</label>
+                <input formControlName="operator" type="text" class="form-control" id="operator" placeholder="Đối tượng..." required>
+              </div>
+              <div class="form-group">
+                <label for="attribute">Thuộc tính</label>
+                <input formControlName="attribute" type="text" class="form-control" id="attribute" placeholder="Thuộc tính..." required>
+              </div>
+              <div class="form-group">
+                <label for="discountAmount">Giá khuyến mãi</label>
+                <input formControlName="discountAmount" type="text" class="form-control" id="discountAmount" placeholder="Giá khuyến mãi..." required>
+              </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                  <button type="submit" class="btn btn-primary" style="background: #5b5d8f;">Lưu</button>
+                </div>
+              </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog"
+      aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h2 class="modal-title" id="confirmDeleteLabel">Xác nhận xóa</h2>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                <h5>Bạn có chắc chắn muốn xóa KHUYẾN MÃI này không?</h5>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal" >Xóa</button>
+              </div>
+          </div>
+      </div>
+  </div>
+
+
+

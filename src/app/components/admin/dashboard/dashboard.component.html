@@ -1,0 +1,58 @@
+<!-- <div class="box jumbotron" style="background-color: rgb(8, 18, 22);">
+  <div class="container">
+  <h1>Trang chủ admin!</h1>
+  </div>
+</div>
+ --><br>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 " style="display: flex;">
+
+  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+
+      <div class="box bg-success jumbotron">
+
+              <h3>KHÁCH HÀNG</h3>
+              <p>{{ totalUsers }} người</p>
+
+
+      </div>
+
+  </div>
+  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+
+      <div class="box bg-warning jumbotron">
+
+              <h3>DOANH THU</h3>
+              <p>{{ totalOrderPrice | currency: 'VND':'':'1.0-0' }} đ</p>
+
+
+      </div>
+
+  </div>
+  <!-- <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+
+      <div class="box bg-primary jumbotron">
+
+              <h3>LƯỢT THÍCH</h3>
+              <p>{{ totalProductCount }} like</p>
+
+
+      </div>
+
+  </div> -->
+  <!-- <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+
+      <div class="box bg-danger jumbotron">
+
+              <h3>CÂU HỎI</h3>
+              <p>{{ totalQuest }} câu hỏi</p>
+
+      </div>
+
+    </div> -->
+</div>
+<div style="width: 80%; background-color: rgb(224, 225, 226); height: auto; margin-left: 50px; border-radius: 10px;">
+  <canvas #myChart></canvas>
+</div>
+
+
+

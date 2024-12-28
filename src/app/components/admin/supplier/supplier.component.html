@@ -1,0 +1,174 @@
+<h1>Quản lý nhà cung cấp</h1>
+<hr>
+<br>
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <!-- <div class="form-inline">
+      <div class="form-group">
+        <input type="text" class="form-control" style="width: 500px; margin-left: 500px;" placeholder="Tìm kiếm..." #searchName>
+      </div>
+      <button type="submit" class="btn btn-primary ml-2" style="background: #5b5d8f;">
+        <i class="fa fa-search"></i>
+      </button>
+    </div> -->
+  </div>
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div class="col-md-6 text-right" style="margin-left: 800px;">
+  <a class="btn btn-success" style="font-size: 15px; background: #5b5d8f; color: white; padding: 8px 16px; margin-bottom: 10px;" data-toggle="modal" data-target="#addCategoryModal">
+    Thêm nhà cung cấp
+  </a>
+</div>
+</div>
+</div>
+
+<div class="shadow-lg rounded-3xl bg-white p-5">
+  <table class="table table-bordered table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Họ Tên</th>
+        <th>Số Điện Thoại</th>
+        <th>Địa Chỉ</th>
+        <th>Email</th>
+        <th>Thao Tác</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let supplier of suppliers">
+        <td>{{ supplier.id }}</td>
+        <td>{{ supplier.name }}</td>
+        <td>{{ supplier.phone }}</td>
+        <td>{{ supplier.address }}</td>
+        <td>{{ supplier.email }}</td>
+        <td>
+          <a class="btn btn-sm btn-info" data-toggle="modal" data-target="#editCategoryModal" (click)="openEditModal(supplier)">
+            <i class="ri-edit-2-line"></i> Sửa
+          </a>
+          |
+          <a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#confirmDeleteModal" (click)="selectedSupplier = supplier">
+            <i class="ri-delete-bin-7-line"></i> Xóa
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- <nav aria-label="Page navigation" class="mt-4">
+  <ul class="pagination justify-content-center">
+    <li class="page-item" [class.disabled]="currentPage === 1">
+      <a class="page-link" (click)="changePage(currentPage - 1)"> &laquo; </a>
+    </li>
+    <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index" [class.active]="i + 1 === currentPage">
+      <a class="page-link" (click)="changePage(i + 1)">{{ i + 1 }}</a>
+    </li>
+    <li class="page-item" [class.disabled]="currentPage === totalPages">
+      <a class="page-link" (click)="changePage(currentPage + 1)"> &raquo; </a>
+    </li>
+  </ul>
+</nav> -->
+
+<ng-template #nocates>
+  <p class="text-center">Không có nhà cung cấp nào.</p>
+</ng-template>
+
+<!-- Add Supplier Modal -->
+<div class="modal fade" id="addCategoryModal" tabindex="-1" role="dialog" aria-labelledby="addCategoryLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="addCategoryLabel">Thêm nhà cung cấp</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="addSupplierForm" (ngSubmit)="addSupplier()">
+          <div class="form-group">
+            <label for="name">Tên nhà cung cấp</label>
+            <input formControlName="name" type="text" class="form-control" id="name" placeholder="Nhập tên nhà cung cấp" required>
+          </div>
+          <div class="form-group">
+            <label for="address">Địa chỉ nhà cung cấp</label>
+            <input formControlName="address" type="text" class="form-control" id="address" placeholder="Địa chỉ nhà cung cấp..." required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email nhà cung cấp</label>
+            <input formControlName="email" type="email" class="form-control" id="email" placeholder="Email nhà cung cấp..." required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Số điện thoại nhà cung cấp</label>
+            <input formControlName="phone" type="text" class="form-control" id="phone" placeholder="Số điện thoại nhà cung cấp..." required>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            <button type="submit" class="btn btn-primary" style="background: #5b5d8f;">Thêm</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Supplier Modal -->
+<div class="modal fade" id="editCategoryModal" tabindex="-1" role="dialog" aria-labelledby="editCategoryLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="editCategoryLabel">Sửa nhà cung cấp</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="editSupplierForm" (ngSubmit)="updateSupplier()">
+          <div class="form-group">
+            <label for="name">Tên nhà cung cấp</label>
+            <input formControlName="name" type="text" class="form-control" id="name" placeholder="Nhập tên nhà cung cấp" required>
+          </div>
+          <div class="form-group">
+            <label for="address">Địa chỉ nhà cung cấp</label>
+            <input formControlName="address" type="text" class="form-control" id="address" placeholder="Địa chỉ nhà cung cấp...">
+          </div>
+          <div class="form-group">
+            <label for="email">Email nhà cung cấp</label>
+            <input formControlName="email" type="email" class="form-control" id="email" placeholder="Email nhà cung cấp..." required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Số điện thoại nhà cung cấp</label>
+            <input formControlName="phone" type="text" class="form-control" id="phone" placeholder="Số điện thoại nhà cung cấp..." required>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            <button type="submit" class="btn btn-primary" style="background: #5b5d8f;">Lưu</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Confirm Delete Modal -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="confirmDeleteLabel">Xác nhận xóa</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h5>Bạn có chắc chắn muốn xóa nhà cung cấp này không?</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+        <button type="button" class="btn btn-danger" (click)="deleteSupplier(selectedSupplier?.id!)" data-dismiss="modal">Xóa</button>
+      </div>
+    </div>
+  </div>
+</div>
