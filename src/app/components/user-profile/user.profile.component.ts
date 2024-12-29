@@ -19,6 +19,8 @@ import { FooterComponent } from '../footer/footer.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { CardProfileComponent } from './card-profile/card-profile.component';
+import { CardSettingComponent } from './card-setting/card-setting.component';
 
 @Component({
   selector: 'user-profile',
@@ -31,6 +33,8 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    CardProfileComponent,
+    CardSettingComponent,
   ],
 })
 export class UserProfileComponent implements OnInit {
