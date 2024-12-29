@@ -66,7 +66,7 @@ export class InventoryComponent implements OnInit {
     }
   }
   onPageChange(page: number) {
-    debugger;
+    ;
     this.currentPage = page < 0 ? 0 : page;
     this.localStorage?.setItem('currentOrderAdminPage', String(this.currentPage));         
     this.getData(this.keyword, this.currentPage, this.itemsPerPage);

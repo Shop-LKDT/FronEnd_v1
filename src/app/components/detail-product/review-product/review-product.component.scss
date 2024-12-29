@@ -1,0 +1,200 @@
+.reviews {
+    width: 100%;
+    margin: 40px auto;
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+
+  
+    h2 {
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+  
+    .commentForm {
+      margin-bottom: 30px;
+      background-color: #f8f8f8;
+      padding: 20px;
+      border-radius: 8px;
+  
+      .ratingSelect {
+        margin-bottom: 15px;
+        
+        span {
+          margin-right: 10px;
+        }
+  
+        .starButton {
+          background: none;
+          border: none;
+          font-size: 24px;
+          color: #ddd;
+          cursor: pointer;
+          padding: 0 2px;
+  
+          &.active {
+            color: #fece51;
+          }
+        }
+      }
+  
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+  
+        textarea {
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+          min-height: 100px;
+          resize: vertical;
+        }
+  
+        button {
+          align-self: flex-end;
+          padding: 8px 20px;
+          background-color: #fece51;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          color: white;
+          font-weight: bold;
+  
+          &:hover {
+            background-color: darken(#fece51, 10%);
+          }
+        }
+      }
+    }
+    .cmt{
+        flex: 3;
+    }
+  
+    .commentsList {
+
+    //   display: flex;
+      flex-direction: column;
+      gap: 20px;
+  
+      .commentItem {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  
+        .commentHeader {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 10px;
+  
+          .userInfo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+  
+            img {
+              width: 40px;
+              height: 40px;
+              border-radius: 50%;
+              object-fit: cover;
+            }
+  
+            .username {
+              font-weight: bold;
+            }
+          }
+  
+          .rating {
+            .star {
+              color: #fece51;
+              font-size: 18px;
+            }
+          }
+        }
+  
+        .commentText {
+          margin-bottom: 10px;
+          line-height: 1.5;
+        }
+  
+        .commentDate {
+          color: #666;
+          font-size: 14px;
+        }
+      }
+    }
+    .ratingStats {
+        flex: 2;
+        padding: 20px;
+        background-color: #f8f8f8;
+        border-radius: 8px;
+        height: fit-content;
+  
+        .averageRating {
+          text-align: center;
+          margin-bottom: 20px;
+          padding-bottom: 20px;
+          border-bottom: 1px solid #ddd;
+  
+          h3 {
+            font-size: 48px;
+            color: #333;
+            margin-bottom: 10px;
+          }
+  
+          .stars {
+            margin-bottom: 10px;
+            
+            .star {
+              font-size: 24px;
+              color: #ddd;
+              
+              &.active {
+                color: #fece51;
+              }
+            }
+          }
+  
+          p {
+            color: #666;
+          }
+        }
+  
+        .ratingBars {
+          .ratingBar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+  
+            .starLabel {
+              flex: 0 0 40px;
+              color: #666;
+            }
+  
+            .barContainer {
+              flex: 1;
+              height: 8px;
+              background-color: #ddd;
+              border-radius: 4px;
+              overflow: hidden;
+  
+              .bar {
+                height: 100%;
+                background-color: #fece51;
+                transition: width 0.3s ease;
+              }
+            }
+  
+            .percentage {
+              flex: 0 0 50px;
+              text-align: right;
+              color: #666;
+              font-size: 14px;
+            }
+          }
+        }}
+  }

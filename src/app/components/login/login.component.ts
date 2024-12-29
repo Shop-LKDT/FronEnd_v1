@@ -57,25 +57,25 @@ export class LoginComponent implements OnInit{
 
   ngOnInit() {
     // Gọi API lấy danh sách roles và lưu vào biến roles
-    debugger
+    
     this.roleService.getRoles().subscribe({
       next: (apiResponse: ApiResponse) => { // Sử dụng kiểu Role[]
-        debugger
+        
         const roles = apiResponse.data
         this.roles = roles;
         this.selectedRole = roles.length > 0 ? roles[0] : undefined;
       },
       complete: () => {
-        debugger
+        
       },
       error: (error: HttpErrorResponse) => {
-        debugger;
+        ;
         console.error(error?.error?.message ?? '');
       }
     });
   }
   createAccount() {
-    debugger
+    
     // Chuyển hướng người dùng đến trang đăng ký (hoặc trang tạo tài khoản)
     this.router.navigate(['/register']);
   }
@@ -83,7 +83,7 @@ export class LoginComponent implements OnInit{
     const message = `phone: ${this.phoneNumber}` +
       `password: ${this.password}`;
     //console.error(message);
-    debugger
+    
 
     const loginDTO: LoginDTO = {
       phone_number: this.phoneNumber,

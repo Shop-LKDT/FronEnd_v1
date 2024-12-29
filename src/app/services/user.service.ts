@@ -58,7 +58,7 @@ export class UserService {
     })
   }
   updateUserDetail(token: string, updateUserDTO: UpdateUserDTO): Observable<ApiResponse>  {
-    debugger
+    
     let userResponse = this.getUserResponseFromLocalStorage();
     return this.http.put<ApiResponse>(`${this.apiUserDetail}/${userResponse?.id}`,updateUserDTO,{
       headers: new HttpHeaders({
@@ -69,7 +69,7 @@ export class UserService {
   }
   saveUserResponseToLocalStorage(userResponse?: UserResponse) {
     try {
-      debugger
+      
       if(userResponse == null || !userResponse) {
         return;
       }

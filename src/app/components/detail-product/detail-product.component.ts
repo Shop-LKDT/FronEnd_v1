@@ -24,6 +24,7 @@ import { ApiResponse } from './../../responses/api.response';
 import { environment } from '../../../environments/environment.development';
 import { FormsModule } from '@angular/forms';
 import { RouterModule} from '@angular/router';
+import { ReviewProductComponent } from './review-product/review-product.component';
 @Component({
   selector: 'app-detail-product',
   templateUrl: './detail-product.component.html',
@@ -37,7 +38,8 @@ import { RouterModule} from '@angular/router';
     MatProgressBarModule,
     FooterComponent,
     FormsModule,
-    RouterModule
+    RouterModule,
+    ReviewProductComponent
   ]
 })
 export class DetailProductComponent implements OnInit {
@@ -62,6 +64,7 @@ export class DetailProductComponent implements OnInit {
     product_id: 0,
     content: '',
     user_id: 0,
+    ratting: 5,
   };
   ratingStats = {
     averageRating: 4.2,
@@ -221,11 +224,11 @@ export class DetailProductComponent implements OnInit {
   handleItemClick(index: number): void {
     //console.error(`Clicked on "${index}"`);
     if(index === 0) {
-      debugger
+      
       this.router.navigate(['/user-profile']);
     }
     else if(index === 1) {
-      debugger
+      
       this.router.navigate(['/my-ordered']);
     }
     else if (index === 2) {
@@ -244,14 +247,14 @@ export class DetailProductComponent implements OnInit {
   getCategories(page: number, limit: number) {
     this.categoryService.getCategories(page, limit).subscribe({
       next: (apiResponse: ApiResponse) => {
-        debugger;
+        ;
         this.categories = apiResponse.data;
       },
       complete: () => {
-        debugger;
+        ;
       },
       error: (error: HttpErrorResponse) => {
-        debugger;
+        ;
         console.error(error?.error?.message ?? '');
       }
     });
@@ -261,15 +264,15 @@ export class DetailProductComponent implements OnInit {
     this.router.navigate(['/categories'], { queryParams: { keyword: this.keyword, selectedCategoryId: this.selectedCategoryId  } });
     this.currentPage = 0;
     this.itemsPerPage = 12;
-    debugger;
+    ;
     this.getProducts(this.keyword, this.selectedCategoryId, this.currentPage, this.itemsPerPage);
   }
 
   getProducts(keyword: string, selectedCategoryId: number, page: number, limit: number) {
-    debugger;
+    ;
     this.productService.getProducts(keyword, selectedCategoryId, page, limit).subscribe({
       next: (apiresponse: ApiResponse) => {
-        debugger;
+        ;
         const response = apiresponse.data;
         response.products.forEach((product: Product) => {
           product.url = `${environment.apiBaseUrl}/products/images/${product.thumbnail}`;
@@ -279,10 +282,10 @@ export class DetailProductComponent implements OnInit {
         this.visiblePages = this.generateVisiblePageArray(this.currentPage, this.totalPages);
       },
       complete: () => {
-        debugger;
+        ;
       },
       error: (error: HttpErrorResponse) => {
-        debugger;
+        ;
         console.error(error?.error?.message ?? '');
       }
     });

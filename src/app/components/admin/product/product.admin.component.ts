@@ -55,15 +55,15 @@ export class ProductAdminComponent implements OnInit {
     searchProducts() {
       this.currentPage = 0;
       this.itemsPerPage = 12;
-      debugger; 
+      ; 
       this.getProducts(this.keyword, this.selectedCategoryId, this.currentPage, this.itemsPerPage);
     }
     
     getProducts(keyword: string, selectedCategoryId: number, page: number, limit: number) {
-      debugger;
+      ;
       this.productService.getProducts(keyword, selectedCategoryId, page, limit).subscribe({
         next: (apiresponse: ApiResponse) => {
-          debugger;
+          ;
           const response = apiresponse.data;
 
           response.products.forEach((product: Product) => {          
@@ -74,17 +74,17 @@ export class ProductAdminComponent implements OnInit {
           this.visiblePages = this.generateVisiblePageArray(this.currentPage, this.totalPages);
         },
         complete: () => {
-          debugger;
+          ;
         },
         error: (error: HttpErrorResponse) => {
-          debugger;
+          ;
           console.error(error?.error?.message ?? '');
         }
       });    
     }
     
     onPageChange(page: number) {
-      debugger;
+      ;
       this.currentPage = page < 0 ? 0 : page;
       this.localStorage?.setItem('currentProductPage', String(this.currentPage)); 
       this.getProducts(this.keyword, this.selectedCategoryId, this.currentPage, this.itemsPerPage);
@@ -109,14 +109,14 @@ export class ProductAdminComponent implements OnInit {
     
     // Hàm xử lý sự kiện khi thêm mới sản phẩm
     insertProduct() {
-      debugger
+      
       // Điều hướng đến trang detail-product với productId là tham số
       this.router.navigate(['/admin/products/insert']);
     } 
 
     // Hàm xử lý sự kiện khi sản phẩm được bấm vào
     updateProduct(productId: number) {
-      debugger
+      
       // Điều hướng đến trang detail-product với productId là tham số
       this.router.navigate(['/admin/products/update', productId]);
     }  
@@ -124,18 +124,18 @@ export class ProductAdminComponent implements OnInit {
       const confirmation = window
       .confirm('Are you sure you want to delete this product?');
       if (confirmation) {
-        debugger
+        
         this.productService.deleteProduct(product.id).subscribe({
           next: (apiResponse: ApiResponse) => {
-            debugger 
+             
             console.error('Xóa thành công')
             location.reload();          
           },
           complete: () => {
-            debugger;          
+            ;          
           },
           error: (error: HttpErrorResponse) => {
-            debugger;
+            ;
             console.error(error?.error?.message ?? '');
           }
         });  

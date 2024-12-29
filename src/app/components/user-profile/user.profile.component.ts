@@ -56,11 +56,11 @@ export class UserProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    debugger
+    
     this.token = this.tokenService.getToken();
     this.userService.getUserDetail(this.token).subscribe({
       next: (response: any) => {
-        debugger
+        
         this.userResponse = {
           ...response,
           date_of_birth: new Date(response.date_of_birth),
@@ -73,10 +73,10 @@ export class UserProfileComponent implements OnInit {
         this.userService.saveUserResponseToLocalStorage(this.userResponse);
       },
       complete: () => {
-        debugger;
+        ;
       },
       error: (error: HttpErrorResponse) => {
-        debugger;
+        ;
         console.error(error?.error?.message ?? '');
       }
     })
@@ -93,7 +93,7 @@ export class UserProfileComponent implements OnInit {
     };
   }
   save(): void {
-    debugger
+    
     if (this.userProfileForm.valid) {
       const updateUserDTO: UpdateUserDTO = {
         fullname: this.userProfileForm.get('fullname')?.value,
@@ -111,7 +111,7 @@ export class UserProfileComponent implements OnInit {
             this.router.navigate(['/login']);
           },
           error: (error: HttpErrorResponse) => {
-            debugger;
+            ;
             console.error(error?.error?.message ?? '');
           }
         });

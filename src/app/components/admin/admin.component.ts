@@ -30,7 +30,7 @@ export class AdminComponent implements OnInit {
   ngOnInit() {
     this.userResponse = this.userService.getUserResponseFromLocalStorage();
     // Default router
-    debugger
+    
     if (this.router.url === '/admin') {
       this.router.navigate(['/admin/orders']);
     }
@@ -42,7 +42,7 @@ export class AdminComponent implements OnInit {
     this.router.navigate(['/']);
   }
   showAdminComponent(componentName: string): void {
-    debugger
+    
     if (componentName === 'orders') {
       this.router.navigate(['/admin/orders']);
     } else if (componentName === 'categories') {
