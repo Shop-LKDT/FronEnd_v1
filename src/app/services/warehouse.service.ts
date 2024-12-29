@@ -17,8 +17,8 @@ export class WareHouseService {
   constructor(private http: HttpClient) { }
 
   // Lấy danh sách warehouse
-  getAllWarehouses(): Observable<ApiResponse> {
-    return this.http.get<ApiResponse>(this.apiUrl);
+  getAllWarehouses(city: String): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(this.apiUrl+`?city=${city}`);
   }
 
   // Tạo warehouse mới

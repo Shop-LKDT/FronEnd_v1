@@ -6,40 +6,35 @@ import { NgFor, NgIf } from '@angular/common';
 
 import { InventoryService } from '../../../services/inventory.service';
 import { ApiResponse } from '../../../responses/api.response';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {  FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Warehouse } from '../../../models/warehouse';
 import { Product } from '../../../models/product';
 import { cpSync } from 'fs';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+
 @Component({
   selector: 'app-inventory',
   standalone: true,
-  imports: [ ReactiveFormsModule,     CommonModule,
-      FormsModule,] ,
+  imports: [NgFor, ReactiveFormsModule, NgIf] ,
   templateUrl: './inventory.component.html',
   styleUrls: ['./inventory.component.scss']
 })
 export class InventoryComponent implements OnInit {
   warehouses: any[] = [];
+  city: string = '';
   productNotInWareHouse: any[] = [];
   idToDelete: number | null = null; // Lưu ID của sản phẩm cần xóa
   selectedInventory: any = null;
   inventory: any = {};  // Sản phẩm được chọn để sửa
   inventories: Inventory[] = [];  // Array to hold the warehouse products
-  totalinventorys: number = 10;  // Total number of products (this could come from API)
+  totalinventorys: number = 50;  // Total number of products (this could come from API)
   inventorysPerPage: number = 5;  // Number of products per page
   currentPage: number = 1;  // Current page
   pageSize: number = 6;  // The maximum number of pages
-  itemsPerPage: number = 15;
   totalPages: number = Math.ceil(this.totalinventorys / this.inventorysPerPage);  // Total pages
   inventoryForm: FormGroup;
-  selectedWarehouse: Warehouse = { id: 0, name: '', location: '', createdAt: [], updatedAt: [] };
+  selectedWarehouse: Warehouse = { id: 0, name: '', location: '', latitude: 0,longitude:0,  createdAt: [], updatedAt: [] };
   selectedProduct: any;
   selectedQuantity: number = 0;
-  keyword:string = "";
-  visiblePages: number[] = [];
-  localStorage?:Storage;
   warehouseProduct: WarehouseProduct = { warehouseId: 0, productId: 0, quantity: 0 };
   constructor(private inventoryService:InventoryService,
     private warehouseService: WareHouseService
@@ -53,7 +48,7 @@ export class InventoryComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getData(this.keyword, this.currentPage, this.itemsPerPage);  // Fetch data on component initialization
+    this.getData();  // Fetch data on component initialization
     this.getAllWarehouse();
 
   }
@@ -62,27 +57,17 @@ export class InventoryComponent implements OnInit {
   changePage(page: number): void {
     if (page >= 1 && page <= this.totalPages) {
       this.currentPage = page;
-      this.getData(this.keyword, this.currentPage, this.itemsPerPage);  // Fetch data for the selected page
+      this.getData();  // Fetch data for the selected page
     }
-  }
-  onPageChange(page: number) {
-    ;
-    this.currentPage = page < 0 ? 0 : page;
-    this.localStorage?.setItem('currentOrderAdminPage', String(this.currentPage));         
-    this.getData(this.keyword, this.currentPage, this.itemsPerPage);
   }
 
   // Method to fetch data for the current page
-  getData(keyword: string, page: number, limit: number): void {
+  getData(): void {
     // Assuming that the API method takes the page and pageSize as arguments
-    
-    this.inventoryService.getAllWarehouseProducts(keyword, page, limit).subscribe(
+    this.inventoryService.getAllWarehouseProducts().subscribe(
       (response: ApiResponse) => {
         if (response && response.data) {
-          this.inventories = response.data;
-            // Assuming 'data' contains the list of products'
-            this.totalPages = response.data.length;
-        this.visiblePages = this.generateVisiblePageArray(this.currentPage, this.totalPages);
+          this.inventories = response.data;  // Assuming 'data' contains the list of products
           console.log('Inventory data:', this.inventories);
         } else {
           console.error('No data found for page ' );
@@ -93,7 +78,7 @@ export class InventoryComponent implements OnInit {
     );
   }
   getAllWarehouse(): void {
-    this.warehouseService.getAllWarehouses().subscribe(
+    this.warehouseService.getAllWarehouses(this.city).subscribe(
       (response: ApiResponse) => {
         if (response.data) {
           this.warehouses = response.data;  // Assuming 'data' contains the list of warehouses
@@ -112,20 +97,6 @@ export class InventoryComponent implements OnInit {
     );
   }
 
-  generateVisiblePageArray(currentPage: number, totalPages: number): number[] {
-    const maxVisiblePages = 8;
-    const halfVisiblePages = Math.floor(maxVisiblePages / 2);
-  
-    let startPage = Math.max(currentPage - halfVisiblePages, 1);
-    let endPage = Math.min(startPage + maxVisiblePages - 1, totalPages);
-  
-    if (endPage - startPage + 1 < maxVisiblePages) {
-      startPage = Math.max(endPage - maxVisiblePages + 1, 1);
-    }
-  
-    return new Array(endPage - startPage + 1).fill(0)
-      .map((_, index) => startPage + index);
-  }
   // Lấy tất cả sản phẩm không có trong kho
   getAllProductsNotInWarehouse(warehouseId: number): void {
     console.log('Getting products not in warehouse:', warehouseId);
@@ -161,7 +132,7 @@ export class InventoryComponent implements OnInit {
         if (response.status === 'CREATED') {
           alert('Sản phẩm đã được thêm thành công');
           this.getAllProductsNotInWarehouse(warehouseProduct.warehouseId); // Làm mới danh sách sản phẩm
-          this.getData(this.keyword, this.currentPage, this.itemsPerPage); // Làm mới danh sách kho lưu trữ
+          this.getData(); // Làm mới danh sách kho lưu trữ
           this.warehouseProduct = { warehouseId: 0, productId: 0, quantity: 0 }; // Reset form// Reset form
         } else {
           alert('Thêm sản phẩm thất bại');
@@ -207,7 +178,7 @@ export class InventoryComponent implements OnInit {
           console.log('Update response:', response);
           if (response.status === 'OK') {
             alert('Quantity updated successfully');
-            this.getData(this.keyword, this.currentPage, this.itemsPerPage); // Refresh danh sách sau khi cập nhật
+            this.getData(); // Refresh danh sách sau khi cập nhật
           } else {
             alert('Failed to update quantity');
           }
@@ -236,7 +207,7 @@ export class InventoryComponent implements OnInit {
           console.log('Delete response:', response);
           if (response.status === 'OK') {
             alert('Kho lưu trữ đã được xóa thành công');
-            this.getData(this.keyword, this.currentPage, this.itemsPerPage); // Làm mới danh sách sau khi xóa
+            this.getData(); // Làm mới danh sách sau khi xóa
           } else {
             alert('Không thể xóa kho lưu trữ');
           }

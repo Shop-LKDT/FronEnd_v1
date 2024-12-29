@@ -14,14 +14,8 @@ export class InventoryService {
   constructor(private http: HttpClient) { }
 
   // Get all products in the warehouse
-  getAllWarehouseProducts(keyword: string,
-    page: number,
-    limit: number): Observable<ApiResponse> {
-    const params = new HttpParams()
-      .set('keyword', keyword)
-      .set('page', page.toString())
-      .set('limit', limit.toString());
-    return this.http.get<ApiResponse>(this.apiUrl, { params });
+  getAllWarehouseProducts(): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(this.apiUrl);
   }
 
   // Get a product by ID
