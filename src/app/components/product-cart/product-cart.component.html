@@ -1,70 +1,81 @@
-<div class=" ">
-    <div class="heart">
-        <div class="row">
-            <div class="col-2" style="margin-right: 20px;">
-                <i class="fas fa-shopping-cart" (click)="addToCart(product)"
-                style="color: #000; font-size: 18px; cursor: pointer;"></i>
-            </div>
-            <div class="col-2"></div>
-            <div class="col-2"></div>
-            <div class="col-2"></div>
+<div class="card-product h-full">
+  <div class="heart flex flex-col h-full relative">
+    <div class="header-card flex justify-between">
+      <div>
+        <i class="fas fa-shopping-cart" (click)="addToCart(product)"></i>
+      </div>
 
-            <div class="col-2">
-                <p>
-
-                    <span class="heart-icon" (click)="toggleFavorite(product.id)">
-                        <i  class="fas fa-heart" style="color: #f8bdbd;"></i>
-                    </span>
-                    </p>
-            </div>
-        </div>
-    <div class="">
-        <img [src]="product.url" style="height: 160px; width: 200px;" alt="" (click)="navigateTo('/products/' + product.id)">
+      <div class="col-2">
+        <p>
+          <span class="heart-icon" (click)="toggleFavorite(product.id)">
+            <i class="fas fa-heart" style="color: #f8bdbd"></i>
+          </span>
+        </p>
+      </div>
     </div>
-    <div style="margin-top: 30px;">
-        <p class="mt-2 text-xs font-bold text-black text-center " style="font-size: 15px; width: 200px; height: 50px;" (click)="navigateTo('/products/' + product.id)">{{
-            product.name }}</p>
-
-        <div class="flex  justify-center gap-5 " (click)="navigateTo('/products/' + product.id)">
-            <!-- <h1></h1>
-                                    <p class="mt-2 text-xs font-bold text-black text-center ">4.0<i class="fas  fa-star color_star"></i></p> -->
-            <!-- <p style="margin-top: 30px; margin-left: -95px; " class="text-center text-red-600 font-bold">{{product.price | number:'1.0-2'}} <u>đ</u></p> -->
-            <p class="product-price" style="font-size: 18px; font-weight: bolder; color: red;margin-top: 10px;margin-left: -10px;">{{ product.price | number:'1.0-2' }} VND<span class="sale">-6%</span></p>
-            <!-- <ng-container *ngIf="product.discountPersent != null && product.discountPersent != ''">
-                <p class="text-center text-current line-through">{{product.price | number:'1.0-2' }}</p>
-            </ng-container> -->
-
-
-        </div>
+    <div class="img_content flex-4 justify-between">
+      <img
+        [src]="product.url"
+        alt=""
+        (click)="navigateTo('/products/' + product.id)"
+      />
     </div>
+    <div class="content-bottom flex-2">
+      <p
+        class="mt-2 text-xs font-bold text-black text-center"
+        (click)="navigateTo('/products/' + product.id)"
+      >
+        {{ product.name }}
+      </p>
 
-    <ng-container *ngIf="product.discountPersent != null && product.discountPersent != ''">
-        <div style="height: 2rem;
-                                   left: -0.5rem;
-                                   position: absolute;
-                                   top: -1rem;
-                                   width: 4rem;
-                                   background: url('https://img.freepik.com/free-vector/banner-design-white-background_1308-95008.jpg?size=626&ext=jpg');
-                                   background-size: cover; /* hoặc contain tùy theo mong muốn */
-                                   display: flex;
-                                   align-items: center;
-                                   justify-content: center;
-                                   color: #fff;
-                                   font-size: 12px;
-                                   font-weight: 700;
-                                   margin: 5px 0 0;
-                                   text-align: center;">
-            <p style="margin-top: 0.7rem;   color: #fff;"> giảm {{product.discountPersent }} </p>
+      <div
+        class="flex justify-center gap-5"
+        (click)="navigateTo('/products/' + product.id)"
+      >
+        <p
+          class="product-price"
+          style="
+            font-size: 18px;
+            font-weight: bolder;
+            color: red;
+            margin-top: 10px;
+            margin-left: -10px;
+          "
+        >
+          {{ product.price | number : "1.0-2" }} VND<span class="sale"
+            >-6%</span
+          >
+        </p>
+      </div>
+
+      
+    </div>
+    <div class="flex-1">
+        <ng-container
+        *ngIf="product.discountPersent != null && product.discountPersent != ''"
+      >
+        <div
+          style="
+            background: url('https://img.freepik.com/free-vector/banner-design-white-background_1308-95008.jpg?size=626&ext=jpg');
+            background-size: cover; /* hoặc contain tùy theo mong muốn */
+          "
+        >
+          <p>
+            giảm {{ product.discountPersent }}
+          </p>
         </div>
-    </ng-container>
-    <div class="flex justify-around gap-5" style="margin-left: -100px;">
+      </ng-container>
+      <div class="flex justify-around gap-5" style="margin-left: -100px">
         <div>
-            <i class="fas fa-star color_star"></i>
-            <i class="fas fa-star color_star"></i>
-            <i class="fas fa-star color_star"></i>
-            <i class="fas fa-star color_star"></i>
-            <i class="fas fa-star color_star"></i>
+          <i class="fas fa-star color_star"></i>
+          <i class="fas fa-star color_star"></i>
+          <i class="fas fa-star color_star"></i>
+          <i class="fas fa-star color_star"></i>
+          <i class="fas fa-star color_star"></i>
         </div>
-
+      </div>
     </div>
+  </div>
+ 
+  
 </div>
