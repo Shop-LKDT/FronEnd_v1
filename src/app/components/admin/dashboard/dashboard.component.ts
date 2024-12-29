@@ -1,19 +1,38 @@
 import { CurrencyPipe, NgFor } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
-import { Inject, PLATFORM_ID, AfterViewInit, Component, ElementRef, ViewChild, OnInit } from '@angular/core';
+import {
+  Inject,
+  PLATFORM_ID,
+  AfterViewInit,
+  Component,
+  ElementRef,
+  ViewChild,
+  OnInit,
+} from '@angular/core';
+import { CardLineChartComponent } from '../chart/card-line-chart/card-line-chart.component';
 
-import { Chart, registerables } from 'chart.js' //npm install chart.js
+import { Chart } from 'chart.js'; //npm install chart.js
 import { UserService } from '../../../services/user.service';
 import { OrderService } from '../../../services/order.service';
-Chart.register(...registerables);
+import { HeaderStatsComponent } from '../header-stats/header-stats.component';
+import { AdminNavbarComponent } from '../admin-navbar/admin-navbar/admin-navbar.component';
+// Chart.register(...registerables);
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [NgFor,RouterModule,CurrencyPipe,],
+  imports: [
+    NgFor,
+    RouterModule,
+    CurrencyPipe,
+    AdminNavbarComponent,
+    HeaderStatsComponent,
+    CardLineChartComponent
+
+  ],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss'
+  styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
   totalProductCount: number = 100;
@@ -22,10 +41,14 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   totalUsers: number = 0;
   totalQuest: number = 100;
   monthlyData: number[] = [];
-  @ViewChild('myChart', { static: true }) myChart!: ElementRef<HTMLCanvasElement>;
+  @ViewChild('myChart', { static: true })
+  myChart!: ElementRef<HTMLCanvasElement>;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: object, private userService:UserService,
-  private orderService: OrderService) {}
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: object,
+    private userService: UserService,
+    private orderService: OrderService,
+  ) {}
 
   ngOnInit(): void {
     this.fetchUserCount();
@@ -62,20 +85,32 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         this.totalOrderPriceStr = '0.00'; // Gán giá trị mặc định nếu lỗi
         this.totalOrderPrice = 0; // Gán giá trị mặc định nếu lỗi
       },
-    });}
+    });
+  }
   renderChart() {
     const ctx = this.myChart.nativeElement.getContext('2d');
     if (!ctx) return;
 
     // Dữ liệu cho từng tháng
-    const monthlyLabels = ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6',
-                           'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'];
+    const monthlyLabels = [
+      'Tháng 1',
+      'Tháng 2',
+      'Tháng 3',
+      'Tháng 4',
+      'Tháng 5',
+      'Tháng 6',
+      'Tháng 7',
+      'Tháng 8',
+      'Tháng 9',
+      'Tháng 10',
+      'Tháng 11',
+      'Tháng 12',
+    ];
 
-    const monthlyDataCHart = this.monthlyData
+    const monthlyDataCHart = this.monthlyData;
     console.log('Monthly data:', monthlyDataCHart);
     const monthlyDataa = [
-      1000, 1500, 1200, 1700, 1300, 1900,
-      2200, 2400, 2100, 2500, 3000, 3200
+      1000, 1500, 1200, 1700, 1300, 1900, 2200, 2400, 2100, 2500, 3000, 3200,
     ];
     console.log('Monthly data:', monthlyDataa);
 
@@ -84,7 +119,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       monthlyDataCHart.slice(0, 3).reduce((a, b) => a + b, 0), // Tổng doanh thu Quý 1
       monthlyDataCHart.slice(3, 6).reduce((a, b) => a + b, 0), // Tổng doanh thu Quý 2
       monthlyDataCHart.slice(6, 9).reduce((a, b) => a + b, 0), // Tổng doanh thu Quý 3
-      monthlyDataCHart.slice(9, 12).reduce((a, b) => a + b, 0) // Tổng doanh thu Quý 4
+      monthlyDataCHart.slice(9, 12).reduce((a, b) => a + b, 0), // Tổng doanh thu Quý 4
     ];
 
     // Dữ liệu cho từng năm
@@ -129,9 +164,18 @@ export class DashboardComponent implements OnInit, AfterViewInit {
           {
             label: 'Doanh thu hàng năm',
             data: [
-              null, null, null, null, // Không có dữ liệu trong tháng
-              null, null, null, null,
-              null, null, null, null,
+              null,
+              null,
+              null,
+              null, // Không có dữ liệu trong tháng
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
               yearlyData[0], // 2021
             ],
             backgroundColor: 'rgba(153, 102, 255, 0.2)',
@@ -143,9 +187,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       },
       options: {
         scales: {
-          y: {
-            beginAtZero: true,
-          },
+          // y: {
+          //   beginAtZero: true,
+          // },
         },
       },
     });
@@ -159,7 +203,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       },
       (error) => {
         console.error('Error fetching monthly revenue:', error);
-      }
+      },
     );
   }
 }
