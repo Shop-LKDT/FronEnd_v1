@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { ApiResponse } from '../responses/api.response';
 import { OrderDTO } from '../dtos/order/order.dto';
-
+import { TokenService } from './token.service';
 @Injectable({
   providedIn: 'root',
 })
@@ -15,8 +15,9 @@ export class OrderService {
   // VNPAY API URLs (Updated URLs)
   private vnpayApiUrl = `${environment.apiBaseUrl}/vnpay/payment`; // Updated VNPAY create payment URL
   private vnpayReturnUrl = `${environment.apiBaseUrl}/vnpay/paymentReturn`; // Updated VNPAY payment return URL
+  private token: string = this.tokenService.getToken();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private tokenService: TokenService) {}
 
   placeOrder(orderData: OrderDTO): Observable<ApiResponse> {
     return this.http.post<ApiResponse>(this.apiUrl, orderData);
@@ -29,7 +30,12 @@ export class OrderService {
 
   getOrdersByUserId(userId: number): Observable<ApiResponse> {
     const url = `${this.apiUrl}/user/${userId}`;
-    return this.http.get<ApiResponse>(url);
+    return this.http.get<ApiResponse>(url, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.token}`,
+      })
+    });
   }
 
   getAllOrders(

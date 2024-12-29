@@ -50,7 +50,7 @@ export class UserService {
     return this.http.post<LoginResponse>(`${environment.apiBaseUrl}/users/login/oauth2?email=${loginDTO.email}`, this.apiConfig);
   }
   getUserDetail(token: string): Observable<ApiResponse> {
-    return this.http.post<any>(`${environment.apiBaseUrl}/users/details`, {
+    return this.http.get<any>(`${environment.apiBaseUrl}/users/details`, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`
