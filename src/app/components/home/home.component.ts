@@ -150,10 +150,10 @@ export class HomeComponent implements OnInit {
                           //   }
                         },
                         complete: () => {
-                          debugger
+                          
                         },
                         error: (error : any) => {
-                          debugger
+                          
                         }
                       })
 
@@ -176,11 +176,11 @@ export class HomeComponent implements OnInit {
     handleItemClick(index: number): void {
       //console.error(`Clicked on "${index}"`);
       if(index === 0) {
-        debugger
+        
         this.router.navigate(['/user-profile']);
       }
       else if(index === 1) {
-        debugger
+        
         this.router.navigate(['/my-ordered']);
       }
       else if (index === 2) {
@@ -204,14 +204,14 @@ export class HomeComponent implements OnInit {
     getCategories(page: number, limit: number) {
       this.categoryService.getCategories(page, limit).subscribe({
         next: (apiResponse: ApiResponse) => {
-          debugger;
+          ;
           this.categories = apiResponse.data;
         },
         complete: () => {
-          debugger;
+          ;
         },
         error: (error: HttpErrorResponse) => {
-          debugger;
+          ;
           console.error(error?.error?.message ?? '');
         }
       });
@@ -221,15 +221,15 @@ export class HomeComponent implements OnInit {
       this.router.navigate(['/categories'], { queryParams: { keyword: this.keyword, selectedCategoryId: this.selectedCategoryId  } });
       this.currentPage = 0;
       this.itemsPerPage = 12;
-      debugger;
+      ;
       this.getProducts(this.keyword, this.selectedCategoryId, this.currentPage, this.itemsPerPage);
     }
 
     getProducts(keyword: string, selectedCategoryId: number, page: number, limit: number) {
-      debugger;
+      ;
       this.productService.getProducts(keyword, selectedCategoryId, page, limit).subscribe({
         next: (apiresponse: ApiResponse) => {
-          debugger;
+          ;
           const response = apiresponse.data;
           response.products.forEach((product: Product) => {
             product.url = `${environment.apiBaseUrl}/products/images/${product.thumbnail}`;
@@ -239,17 +239,17 @@ export class HomeComponent implements OnInit {
           this.visiblePages = this.generateVisiblePageArray(this.currentPage, this.totalPages);
         },
         complete: () => {
-          debugger;
+          ;
         },
         error: (error: HttpErrorResponse) => {
-          debugger;
+          ;
           console.error(error?.error?.message ?? '');
         }
       });
     }
 
     onPageChange(page: number) {
-      debugger;
+      ;
       this.currentPage = page < 0 ? 0 : page;
       this.localStorage?.setItem('currentProductPage', String(this.currentPage));
       this.getProducts(this.keyword, this.selectedCategoryId, this.currentPage, this.itemsPerPage);
@@ -272,7 +272,7 @@ export class HomeComponent implements OnInit {
 
     // Hàm xử lý sự kiện khi sản phẩm được bấm vào
     onProductClick(productId: number) {
-      debugger;
+      ;
       // Điều hướng đến trang detail-product với productId là tham số
       this.router.navigate(['/products', productId]);
     }

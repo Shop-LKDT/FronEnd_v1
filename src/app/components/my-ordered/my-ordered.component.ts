@@ -57,7 +57,7 @@ export class MyOrderedComponent {
   getOrderByUserId(user_id:number) {
     this.orderService.getOrdersByUserId(user_id).subscribe({
       next: (apiResponse: ApiResponse) => {
-        debugger;
+        ;
         this.orders = apiResponse.data
         
             .map((orders: OrderResponse) => {
@@ -69,7 +69,7 @@ export class MyOrderedComponent {
         console.log(apiResponse.data)
       },
       complete: () => {
-        debugger;
+        ;
       }
     })
 

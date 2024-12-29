@@ -43,14 +43,14 @@ export class InsertProductAdminComponent implements OnInit {
   getCategories(page: number, limit: number) {
     this.categoryService.getCategories(page, limit).subscribe({
       next: (apiResponse: ApiResponse) => {
-        debugger;
+        ;
         this.categories = apiResponse.data;
       },
       complete: () => {
-        debugger;
+        ;
       },
       error: (error: HttpErrorResponse) => {
-        debugger;
+        ;
         console.error(error?.error?.message ?? '');
       }
     });
@@ -70,26 +70,26 @@ export class InsertProductAdminComponent implements OnInit {
   insertProduct() {    
     this.productService.insertProduct(this.insertProductDTO).subscribe({
       next: (apiResponse: ApiResponse) => {
-        debugger
+        
         if (this.insertProductDTO.images.length > 0) {
           const productId = apiResponse.data.id; // Assuming the response contains the newly created product's ID
           this.productService.uploadImages(productId, this.insertProductDTO.images).subscribe({
             next: (imageResponse:ApiResponse) => {
-              debugger
+              
               // Handle the uploaded images response if needed              
               console.log('Images uploaded successfully:', imageResponse.data);
               // Navigate back to the previous page
               this.router.navigate(['../'], { relativeTo: this.route });
             },
             error: (error: HttpErrorResponse) => {
-              debugger;
+              ;
               console.error(error?.error?.message ?? '');
             }
           })          
         }
       },
       error: (error: HttpErrorResponse) => {
-        debugger;
+        ;
         console.error(error?.error?.message ?? '');
       } 
     });    

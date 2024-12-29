@@ -1,0 +1,93 @@
+
+<div>
+<h2 style="font-size: 20px;" class="font-bold mt-4">Đánh giá và bình luận</h2>
+
+</div>
+<div class="reviews">
+  <!-- Rating Statistics -->
+  <div class="ratingStats">
+    <div class="averageRating">
+      <h3>{{ calculateAverageRating(reviews) }}</h3>
+      <div class="stars">
+        <span
+          *ngFor="let star of [1, 2, 3, 4, 5]"
+          [ngClass]="{'active': +calculateAverageRating(reviews) >= star}"
+          class="star"
+        >
+          ★
+        </span>
+      </div>
+      <p>{{ reviews.length }} đánh giá</p>
+    </div>
+
+    <div class="ratingBars">
+      <div *ngFor="let star of [5, 4, 3, 2, 1]" class="ratingBar">
+        <span class="starLabel">{{ star }} ★</span>
+        <div class="barContainer">
+          <div class="bar" [style.width]="calculateStarPercentages(reviews)[star] + '%'"></div>
+        </div>
+        <span class="percentage">{{ calculateStarPercentages(reviews)[star].toFixed(1) }}%</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Comment Form -->
+  <div class="cmt">
+    <div class="commentForm">
+      <div class="ratingSelect">
+        <span>Đánh giá: </span>
+        <button
+          *ngFor="let star of [1, 2, 3, 4, 5]"
+          [ngClass]="{'active': rating >= star}"
+          (click)="setRating(star)"
+          class="starButton"
+        >
+          ★
+        </button>
+      </div>
+      <form (ngSubmit)="handleSubmitReview()">
+        <textarea
+          [(ngModel)]="newComment"
+          name="newComment"
+          placeholder="Viết đánh giá của bạn..."
+          required
+        ></textarea>
+        <button type="submit">Gửi đánh giá</button>
+      </form>
+    </div>
+
+    <!-- Comments List -->
+    <div class="commentsList">
+      <h2>Danh sách đánh giá</h2>
+      <div *ngIf="reviews.length > 0; else noReviews">
+        <div *ngFor="let review of reviews">
+          <div *ngIf="review?.user" class="commentItem">
+            <div class="commentHeader">
+              <div class="userInfo">
+                <img
+                  src="https://th.bing.com/th/id/OIP.ItvA9eX1ZIYT8NHePqeuCgHaHa?rs=1&pid=ImgDetMain"
+                  alt="User Avatar"
+                />
+                <span class="username">{{ review.user.fullname }}</span> <span class="commentDate">{{ review.created_at | date:'shortDate' }}</span>
+              </div>
+              <div class="rating">
+                <span *ngFor="let _ of [].constructor(review.ratting)">
+                  ★
+                </span>
+              </div>
+            </div>
+            <p class="commentText ml-5">{{ review.content }}</p>
+          </div>
+        </div>
+        <div class="float-right cursor-pointer inline-block" >
+          <p> <span class="mr-2" (click)="rutgonReviews()">Ẩn bớt</span>      <span (click)="loadMoreReviews()">Hiển thị thêm</span></p>
+        </div>
+      </div>
+      
+      
+      <ng-template #noReviews>
+        <p>Chưa có đánh giá nào</p>
+      </ng-template>
+    </div>
+  </div>
+</div>

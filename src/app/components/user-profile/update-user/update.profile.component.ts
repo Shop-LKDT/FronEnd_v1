@@ -94,7 +94,7 @@ export class UpdateUserComponent implements OnInit{
     });
   }
   ngOnInit() {
-    debugger;
+    ;
     this.route.queryParams.subscribe(params => {
       this.idEmail = params['id'];
       this.typeRequest = params['type'];
@@ -110,7 +110,7 @@ export class UpdateUserComponent implements OnInit{
 
             next: (response: any) =>{
               console.log(response.data.email)
-              debugger;
+              ;
               this.loginDTO.email = response.data.email;
               this.loginDTO.phone_number = "1111111111";
               this.loginDTO.password = "123456789"
@@ -118,17 +118,17 @@ export class UpdateUserComponent implements OnInit{
               this.userService.loginGG(this.loginDTO)
                     .subscribe({
                         next: (apiResponse: LoginResponse) => {
-                          debugger;
+                          ;
                           const { token } = apiResponse;
                           console.log(token)
 
                           if (this.rememberMe) {          
                             this.tokenService.setToken(apiResponse.token);
-                            debugger;
+                            ;
                             this.userService.getUserDetail(apiResponse.token).subscribe({
                               next: (apiResponse2: any) => {
                                 console.log(apiResponse2)
-                                debugger
+                                
                                 this.userResponse = {
                                   ...apiResponse2.data,
                                   date_of_birth: new Date(apiResponse2.data.date_of_birth),
@@ -143,26 +143,26 @@ export class UpdateUserComponent implements OnInit{
                               },
                               complete: () => {
                                 this.cartService.refreshCart();
-                                debugger;
+                                ;
                               },
                               error: (error: HttpErrorResponse) => {
-                                debugger;
+                                ;
                                 console.error(error?.error?.message ?? '');
                               } 
                             })
                           }                        
                         },
                         complete: () => {
-                          debugger
+                          
                         },
                         error: (error : any) => {
-                          debugger
+                          
                         }
                       }
                     );
             },
             complete: () =>{
-              debugger;
+              ;
             },
             error: (error: any) => {
               console.log("Error fetching data error: "+error.error.message);
@@ -179,7 +179,7 @@ export class UpdateUserComponent implements OnInit{
   }
 
   save(){
-    debugger;
+    ;
     if (this.userProfileForm.get('phone_number')?.value.length<5){
       alert("Can not register this account because of invalid phone number");
       return;
@@ -196,7 +196,7 @@ export class UpdateUserComponent implements OnInit{
         this.registerDto.google_account_id = this.idEmail;
         this.userService.getGoogleUserInfo(this.idEmail).subscribe({
           next: (response: any) =>{
-            debugger;
+            ;
             this.avatar = response.picture;
             this.registerDto.email = response.email;
             this.registerDto.fullname = "";
@@ -221,7 +221,7 @@ export class UpdateUserComponent implements OnInit{
             }
             this.userService.register(this.registerDto).subscribe({
               next: (response: any) =>{
-                debugger;
+                ;
                 alert("You have been updated successfully! Please login again");
                 this.loginDTO.phone_number = this.registerDto.phone_number;
                 this.loginDTO.password = this.registerDto.password;
@@ -229,14 +229,14 @@ export class UpdateUserComponent implements OnInit{
                 this.userService.login(this.loginDTO)
                   .subscribe({
                       // next: (response: ApiResponse) => {
-                      //   debugger
+                      //   
                       //   const {token} = response.data;
                       //   console.log(token)
                       //   this.tokenService.setToken(token);
-                      //   debugger;
+                      //   ;
                       //   this.userService.getUserDetail(token).subscribe({
                       //     next: (userDetails: any) => {
-                      //       debugger;
+                      //       ;
                       //       this.userResponse = {
                       //         ...userDetails,
                       //         date_of_birth: new Date(userDetails.date_of_birth)
@@ -249,22 +249,22 @@ export class UpdateUserComponent implements OnInit{
                       //       }
                       //     },
                       //     complete: () => {
-                      //       debugger
+                      //       
                       //     },
                       //     error: (error : any) => {
-                      //       debugger
+                      //       
                       //     }
                       //   })
                       // },
                       next: (apiResponse: ApiResponse) => {
-                        debugger;
+                        ;
                         const { token } = apiResponse.data;
                         if (this.rememberMe) {          
                           this.tokenService.setToken(token);
-                          debugger;
+                          ;
                           this.userService.getUserDetail(token).subscribe({
                             next: (apiResponse2: ApiResponse) => {
-                              debugger
+                              
                               this.userResponse = {
                                 ...apiResponse2.data,
                                 date_of_birth: new Date(apiResponse2.data.date_of_birth),
@@ -279,26 +279,26 @@ export class UpdateUserComponent implements OnInit{
                             },
                             complete: () => {
                               this.cartService.refreshCart();
-                              debugger;
+                              ;
                             },
                             error: (error: HttpErrorResponse) => {
-                              debugger;
+                              ;
                               console.error(error?.error?.message ?? '');
                             } 
                           })
                         }                        
                       },
                       complete: () => {
-                        debugger
+                        
                       },
                       error: (error : any) => {
-                        debugger
+                        
                       }
                     }
                   );
               },
               complete: () =>{
-                debugger;
+                ;
               },
               error: (error: any) => {
                 console.log("Error fetching data error: "+error.error.message);
@@ -306,7 +306,7 @@ export class UpdateUserComponent implements OnInit{
             });
           },
           complete: () =>{
-            debugger;
+            ;
           },
           error: (error: any) => {
             console.log("Error fetching data error: "+error.error.message);
@@ -320,7 +320,7 @@ export class UpdateUserComponent implements OnInit{
     this.buttonHit = true;
     this.userService.getUserByPhoneNumber(this.userProfileForm.get('phone_number')?.value).subscribe({
       next: (response: any) =>{
-        debugger;
+        ;
         if (response.id>=1){
           this.checkExistPhoneNumber = true;
         } else {
@@ -329,10 +329,10 @@ export class UpdateUserComponent implements OnInit{
         console.log(this.checkExistPhoneNumber);
       },
       complete: () =>{
-        debugger;
+        ;
       },
       error: (error: any) =>{
-        debugger;
+        ;
         console.log("Error fetching data: error "+error.error.message);
       }
     })

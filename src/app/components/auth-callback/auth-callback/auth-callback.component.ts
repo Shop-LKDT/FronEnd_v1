@@ -35,21 +35,21 @@ export class AuthCallbackComponent extends BaseComponent implements OnInit {
     }
     /// Lấy mã xác thực từ URL
     this.activatedRoute.queryParams.subscribe(params => {
-      debugger
+      
       const code = params['code'];
       console.log('code', code);
       if (code) {
         // Gửi mã này đến server để lấy token
         this.authService.exchangeCodeForToken(code, loginType).pipe(
           tap((response: ApiResponse) => {
-            debugger
+            
             // Giả sử API trả về token trong response.data
             const token = response.data.token;
             // Lưu token
             this.tokenService.setToken(token);
           }),
           switchMap((response) => {
-            debugger
+            
             const token = response.data.token;
             // Gọi hàm getUserDetail với token
             return this.userService.getUserDetail(token);
@@ -58,7 +58,7 @@ export class AuthCallbackComponent extends BaseComponent implements OnInit {
         ).subscribe({
           next: (apiResponse: ApiResponse) => {
             // Xử lý thông tin người dùng
-            debugger
+            
             this.userResponse = {
               ...apiResponse.data,
               date_of_birth: new Date(apiResponse.data.date_of_birth),

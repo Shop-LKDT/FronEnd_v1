@@ -54,14 +54,14 @@ export class UpdateProductAdminComponent implements OnInit {
   getCategories(page: number, limit: number) {
     this.categoryService.getCategories(page, limit).subscribe({
       next: (apiResponse: ApiResponse) => {
-        debugger;
+        ;
         this.categories = apiResponse.data;
       },
       complete: () => {
-        debugger;
+        ;
       },
       error: (error: HttpErrorResponse) => {
-        debugger;
+        ;
         console.error(error?.error?.message ?? '');
       } 
     });
@@ -80,7 +80,7 @@ export class UpdateProductAdminComponent implements OnInit {
         
       },
       error: (error: HttpErrorResponse) => {
-        debugger;
+        ;
         console.error(error?.error?.message ?? '');
       } 
     });     
@@ -95,20 +95,20 @@ export class UpdateProductAdminComponent implements OnInit {
     };
     this.productService.updateProduct(this.product.id, updateProductDTO).subscribe({
       next: (apiResponse: ApiResponse) => {  
-        debugger        
+                
       },
       complete: () => {
-        debugger;
+        ;
         this.router.navigate(['/admin/products']);        
       },
       error: (error: HttpErrorResponse) => {
-        debugger;
+        ;
         console.error(error?.error?.message ?? '');
       } 
     });  
   }
   showImage(index: number): void {
-    debugger
+    
     if (this.product && this.product.product_images && 
         this.product.product_images.length > 0) {
       // Đảm bảo index nằm trong khoảng hợp lệ        
@@ -122,17 +122,17 @@ export class UpdateProductAdminComponent implements OnInit {
     }
   }
   thumbnailClick(index: number) {
-    debugger
+    
     // Gọi khi một thumbnail được bấm
     this.currentImageIndex = index; // Cập nhật currentImageIndex
   }  
   nextImage(): void {
-    debugger
+    
     this.showImage(this.currentImageIndex + 1);
   }
 
   previousImage(): void {
-    debugger
+    
     this.showImage(this.currentImageIndex - 1);
   }  
   onFileChange(event: any) {
@@ -147,7 +147,7 @@ export class UpdateProductAdminComponent implements OnInit {
     this.images = files;
     this.productService.uploadImages(this.productId, this.images).subscribe({
       next: (apiResponse: ApiResponse) => {
-        debugger
+        
         // Handle the uploaded images response if needed              
         console.log('Images uploaded successfully:', apiResponse);
         this.images = [];       
@@ -155,7 +155,7 @@ export class UpdateProductAdminComponent implements OnInit {
         this.getProductDetails(); 
       },
       error: (error: HttpErrorResponse) => {
-        debugger;
+        ;
         console.error(error?.error?.message ?? '');
       } 
     })
@@ -168,7 +168,7 @@ export class UpdateProductAdminComponent implements OnInit {
           location.reload();          
         },        
         error: (error: HttpErrorResponse) => {
-          debugger;
+          ;
           console.error(error?.error?.message ?? '');
         } 
       });

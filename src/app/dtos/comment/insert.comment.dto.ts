@@ -12,6 +12,9 @@ export class InsertCommentDTO {
     @IsNotEmpty()
     content: String;
 
+    @IsNotEmpty()
+    ratting: number;
+
 
 
     user_id: number;
@@ -20,5 +23,6 @@ export class InsertCommentDTO {
         this.product_id = data.productId;
         this.content = data.content;
         this.user_id = data.user.id;
+        this.ratting = data.ratting;
     }
 }

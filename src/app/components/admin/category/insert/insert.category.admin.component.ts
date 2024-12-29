@@ -39,11 +39,11 @@ export class InsertCategoryAdminComponent implements OnInit {
   insertCategory() {    
     this.categoryService.insertCategory(this.insertCategoryDTO).subscribe({
       next: (response) => {
-        debugger
+        
         this.router.navigate(['/admin/categories']);        
       },
       error: (error: HttpErrorResponse) => {
-        debugger;
+        ;
         console.error(error?.error?.message ?? '');
       }        
     });    
