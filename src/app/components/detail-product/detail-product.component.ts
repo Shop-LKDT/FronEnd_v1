@@ -158,7 +158,7 @@ export class DetailProductComponent implements OnInit {
     this.isPressedAddToCart = true;
     if (this.product) {
       this.cartService.addToCart(this.product.id, this.quantity);
-      alert("The product has been added to the cart");
+      alert("Đã thêm vào giỏ hàng");
     } else {
       console.error('Cannot add product to cart because product is null.');
     }

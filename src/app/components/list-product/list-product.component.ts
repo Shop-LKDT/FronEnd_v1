@@ -85,7 +85,7 @@ export class ListProductComponent implements OnInit {
 
   addToCart(product: Product): void {
     this.cartService.addToCart(product.id, 1);
-    alert("The product has been added to the cart");
+    alert("Đã thêm vào giỏ hàng");
   }
 
   getProducts(keyword: string, selectedCategoryId: number, page: number, limit: number) {

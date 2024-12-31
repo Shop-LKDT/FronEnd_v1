@@ -1,4 +1,14 @@
 @import '../../styles/shared-styles.scss';
+
+.description {
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Hiển thị tối đa 3 dòng */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.5; /* Chiều cao mỗi dòng */
+  height: calc(1.5em * 3); /* Tương ứng với 3 dòng */
+}
 .intro-section {
     color: black;
     padding: 20px;

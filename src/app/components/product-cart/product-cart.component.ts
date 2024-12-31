@@ -50,7 +50,7 @@ export class ProductCartComponent {
   }
   addToCart(product: Product): void {
     this.cartService.addToCart(product.id, 1);
-    alert("The product has been added to the cart");
+    alert("Đã thêm vào giỏ hàng");
   }
   toggleFavorite(productID: number): void {
     // Kiểm tra nếu userResponse không tồn tại hoặc không có id
