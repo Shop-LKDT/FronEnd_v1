@@ -1,4 +1,4 @@
-<h1>kho lưu trữ</h1>
+<h1 class="text-center">kho lưu trữ</h1>
 <hr>
 <br>
 
@@ -19,7 +19,7 @@
 </div>
 <br>
 <div>
-  <table class="table">
+  <table class="table text-center">
     <thead class="table-dark">
       <tr>
         <th>ID</th>
@@ -34,7 +34,7 @@
       <tr *ngFor="let inventory of inventories">
         <td>{{ inventory.id }}</td>
         <td>{{ inventory.productId }}</td>
-        <td>{{ inventory.productName }}</td>
+        <td class="text-left">{{ inventory.productName }}</td>
         <td>{{ inventory.quantity }}</td>
         <td>{{ inventory.warehouse}}</td>
 
