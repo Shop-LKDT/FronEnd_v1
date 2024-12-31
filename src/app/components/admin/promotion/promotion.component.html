@@ -14,7 +14,7 @@
 </div>
 
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-  <a class="btn btn-sm btn-success" style="padding: 5px; font-size: 15px; background:#5b5d8f; color:white; position: absolute; right: 0;" data-toggle="modal" data-target="#addCategoryModal">
+  <a class="hover:bg-sky-700 mr-5 btn btn-sm btn-success" style="padding: 8px; font-size: 15px; background:#5b5d8f; color:white; position: absolute; right: 0;" data-toggle="modal" data-target="#addCategoryModal">
     THÊM KHUYẾN MÃI
   </a>
 </div>
@@ -23,20 +23,20 @@
 <div class="shadow-lg rounded-3xl bg-white p-8">
   <table class="table table-bordered table-striped">
     <thead class="table-dark">
-      <tr>
+      <tr class="text-center">
         <th>ID</th>
         <th>Mã KHUYẾN MÃI</th>
-        <th>Trạng thái</th>
-        <th>Giá trị (%)</th>
-        <th><i class="ri-settings-5-fill"></i></th>
+        <th class="text-center">Trạng thái</th>
+        <th class="text-center">Giá trị (%)</th>
+        <th class="text-center"><i class="ri-settings-5-fill"></i></th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let promotion of coupons">
+      <tr class="text-center" *ngFor="let promotion of coupons">
         <td>{{ promotion.id }}</td>
         <td>{{ promotion.code }}</td>
-        <td>{{ promotion.active ? 'Hoạt động' : 'Ngừng' }}</td>
-        <td>{{ promotion.value }}</td>
+        <td class="text-center">{{ promotion.active ? 'Hoạt động' : 'Ngừng' }}</td>
+        <td class="text-center">{{ promotion.value }}</td>
 
         <td>
           <a class="btn btn-sm" data-toggle="modal" data-target="#editCategoryModal" (click)="openEditModal(promotion)">
