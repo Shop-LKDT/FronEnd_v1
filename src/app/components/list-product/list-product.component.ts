@@ -39,7 +39,7 @@ export class ListProductComponent implements OnInit {
   categories: Category[] = [];
   selectedCategoryId: number = 0;
   currentPage: number = 0;
-  itemsPerPage: number = 100;
+  itemsPerPage: number = 500;
   pages: number[] = [];
   totalPages: number = 0;
   visiblePages: number[] = [];
