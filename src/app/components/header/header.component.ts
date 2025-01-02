@@ -93,11 +93,12 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/categories'], {
       queryParams: {
         keyword: this.keyword,
-        selectedCategoryId: this.selectedCategoryId,
+        selectedCategoryId: this.selectedCategoryId || 0,
       },
     });
     this.currentPage = 0;
     this.itemsPerPage = 12;
+    console.log(this.keyword);
     this.getProducts(
       this.keyword,
       this.selectedCategoryId,

@@ -1,90 +1,104 @@
 <app-header></app-header>
 <div class="container">
-  <div class="intro-section">
-
-  </div>
+  <div class="intro-section"></div>
   <section class="pt-4">
-    <div class="grid grid-cols-1 gap-3 gap-y-10 lg:grid-cols-6 ">
-      <div class="hidden lg:block flex items-center justify-center">
-        <p class="text-xl flex items-center gap-2 col-span-1">Lọc Theo
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter"
-            viewBox="0 0 16 16">
+    <div class="flex main-content">
+      <div class="filter hidden lg:block items-center justify-center">
+        <p class="text-xl flex items-center gap-2 col-span-1">
+          Lọc Theo
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-filter"
+            viewBox="0 0 16 16"
+          >
             <path
-              d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5" />
+              d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"
+            />
           </svg>
           <!-- <mat-icon class="ml-2 ">filter_list</mat-icon> -->
         </p>
         <form class="hidden lg:block">
           <div *ngFor="let item of filterBrand">
-            <div class="pt-3  font-medium">{{item.name}}</div>
+            <div class="pt-3 font-medium">{{ item.name }}</div>
 
             <div class="pt-0">
               <mat-radio-group>
                 <div *ngFor="let option of item.option">
-
-
-                  <mat-radio-button [color]="'primary'" [id]="item.id" [value]="option.value"
-                    (click)="handlefilterSimple(option.value,item.id)"><span>{{option.label}}</span></mat-radio-button>
-
+                  <mat-radio-button
+                    [color]="'primary'"
+                    [id]="item.id"
+                    [value]="option.value"
+                    (click)="handlefilterSimple(option.value, item.id)"
+                    ><span>{{ option.label }}</span></mat-radio-button
+                  >
                 </div>
               </mat-radio-group>
             </div>
           </div>
           <div *ngFor="let item of filterColor">
-            <div class="pt-6  font-medium">{{item.name}}</div>
+            <div class="pt-6 font-medium">{{ item.name }}</div>
 
             <div class="pt-0">
               <div *ngFor="let option of item.option">
-                <mat-checkbox [color]="'primary'" [id]="item.id" [value]="option.value"
-                  (click)="handlefilterMuiltiple(option.value,item.id)">
-                  <span>{{option.label}}</span>
+                <mat-checkbox
+                  [color]="'primary'"
+                  [id]="item.id"
+                  [value]="option.value"
+                  (click)="handlefilterMuiltiple(option.value, item.id)"
+                >
+                  <span>{{ option.label }}</span>
                 </mat-checkbox>
               </div>
             </div>
           </div>
           <div *ngFor="let item of filterPrice">
-            <div class="pt-6 font-medium">{{item.name}}</div>
+            <div class="pt-6 font-medium">{{ item.name }}</div>
 
             <div class="pt-0">
               <mat-radio-group>
                 <div *ngFor="let option of item.option">
-
-
-                  <mat-radio-button [color]="'primary'" [id]="item.id" [value]="option.value"
-                    (click)="handlefilterSimple(option.value,item.id)"><span>{{option.label}}</span></mat-radio-button>
-
+                  <mat-radio-button
+                    [color]="'primary'"
+                    [id]="item.id"
+                    [value]="option.value"
+                    (click)="handlefilterSimple(option.value, item.id)"
+                    ><span>{{ option.label }}</span></mat-radio-button
+                  >
                 </div>
               </mat-radio-group>
             </div>
           </div>
         </form>
       </div>
-      <div class="lg:col-span-5"
-        style="border: 1px solid color(#fff red green blue); border-radius: 10px; background-color: #fff;">
+      <div class="listProduct">
+        <ng-container class=".grid-item"
+          *ngFor="
+            let item of productFilter
+              | paginate
+                : {
+                    itemsPerPage: tableSize,
+                    currentPage: page,
+                    totalItems: count
+                  }
+          "
+        >
+          <app-product-cart [product]="item"></app-product-cart>
+        </ng-container>
 
-        <div class="flex flex-wrap lg:justify-start lg:ml-5  justify-center gap-5">
-
-          <ng-container *ngFor="let item of productFilter | paginate : { itemsPerPage: tableSize,
-                                                                              currentPage: page,
-                                                                              totalItems: count
-                                                                          };">
-            <app-product-cart
-              style="border: 1px solid; border-radius: 10px; background-color: #fff; box-shadow: #EDEDED; margin-top: 20px; margin-bottom: -20px;"
-              [product]="item"></app-product-cart>
-          </ng-container>
-
-
-        </div>
         <div class="text-center mt-5">
-
-          <pagination-controls previousLabel="Trước" nextLabel="Sau" (pageChange)="onTableDataChange($event)">
+          <pagination-controls
+            previousLabel="Trước"
+            nextLabel="Sau"
+            (pageChange)="onTableDataChange($event)"
+          >
           </pagination-controls>
         </div>
-
       </div>
     </div>
   </section>
-
 </div>
-<div style="margin-bottom: 30px;"></div>
+<div style="margin-bottom: 30px"></div>
 <app-footer></app-footer>

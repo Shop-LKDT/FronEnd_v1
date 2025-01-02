@@ -2,7 +2,7 @@ export const filterMultipleColor = [
 
     {
         id: "color",
-        name: "Color",
+        name: "Màu Sắc",
         option: [
             { value: "pink", label: "Pink" },
             { value: "black", label: "Black" },
@@ -17,7 +17,7 @@ export const filterMultipleColor = [
 export const filterBrand = [
     {
         id: "selectedCategoryId",
-        name: "Brand",
+        name: "Loại ",
         option: [
             { value: "1", label: "PC Bán Chạy" },
             { value: "2", label: "Bàn Phím" },
@@ -34,7 +34,7 @@ export const filterBrand = [
 export const filterPrice = [
     {
         id: "price",
-        name: "Price Range",
+        name: "Giá",
         option: [
             { value: "1000000", label: "Từ 100 - 1 Triệu" },
             { value: "4000000", label: "Từ 2 - 4 Triệu" },
