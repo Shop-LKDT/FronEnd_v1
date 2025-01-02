@@ -1,15 +1,14 @@
 <ng-container *ngIf="item">
-    <leaflet-marker [leafletLatLng]="[item.latitude, item.longitude]" [leafletIcon]="isRed ? redIcon : defaultIcon">
-      <leaflet-popup>
-        <div class="popupContainer">
-          <img (click)="handleClick()" [src]="item.images[0]" [alt]="item.title" />
-          <div class="textContainer">
-            <h3>{{ item.title }}</h3>
-            <span>{{ item.bedroom }} bedroom</span>
-            <b>$ {{ item.price }}</b>
-          </div>
+  <leaflet-marker [leafletLatLng]="[item.latitude, item.longitude]" [leafletIcon]="isRed ? redIcon : defaultIcon">
+    <leaflet-popup>
+      <div class="popupContainer">
+        <img (click)="handleClick()" [src]="item.images[0]" [alt]="item.title" />
+        <div class="textContainer">
+          <h3>{{ item.title }}</h3>
+          <span>{{ item.bedroom }} bedroom</span>
+          <b>$ {{ item.price }}</b>
         </div>
-      </leaflet-popup>
-    </leaflet-marker>
-  </ng-container>
-  
+      </div>
+    </leaflet-popup>
+  </leaflet-marker>
+</ng-container>

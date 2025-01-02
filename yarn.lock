@@ -160,7 +160,7 @@
     symbol-observable "4.0.0"
     yargs "17.7.2"
 
-"@angular/common@^16.0.0 || ^17.0.0", "@angular/common@^17.0.0", "@angular/common@>=13.0.0", "@angular/common@>=14.0.0", "@angular/common@>=16.0.0", "@angular/common@17.3.5":
+"@angular/common@^16.0.0 || ^17.0.0", "@angular/common@^17.0.0", "@angular/common@>=13.0.0", "@angular/common@>=14.0.0", "@angular/common@>=16.0.0", "@angular/common@17", "@angular/common@17.3.5", "@angular/common@19":
   version "17.3.5"
   resolved "https://registry.npmjs.org/@angular/common/-/common-17.3.5.tgz"
   integrity sha512-Ox91WxSnOSrQ6I21cHi69EfT2Pxtd5Knb5AsdwpxqE57V2E7EnWMhb+LP+holCtFUhK529EGXCk788M+Elyw6g==
@@ -188,7 +188,7 @@
   dependencies:
     tslib "^2.3.0"
 
-"@angular/core@^16.0.0 || ^17.0.0", "@angular/core@^17.0.0", "@angular/core@>=13.0.0", "@angular/core@>=16.0.0", "@angular/core@17.3.5":
+"@angular/core@^16.0.0 || ^17.0.0", "@angular/core@^17.0.0", "@angular/core@>=13.0.0", "@angular/core@>=16.0.0", "@angular/core@17", "@angular/core@17.3.5", "@angular/core@19":
   version "17.3.5"
   resolved "https://registry.npmjs.org/@angular/core/-/core-17.3.5.tgz"
   integrity sha512-y6P27lcrKy3yMx/rtMuGsAnDyVEsS3BdyArTXcD0TOImVGHhVIaB0L95DUCam3ajTe2f2x39eozJZDh7QSpJaw==
@@ -301,6 +301,13 @@
   integrity sha512-MBKrIq3w6inFGVjZoCsXRiTYomell6DSLbUUQfvphTN1ExUzbcFvxWoM1p69KmIWqxWlUAECl3sV/cesSeNGRg==
   dependencies:
     critters "0.0.22"
+    tslib "^2.3.0"
+
+"@asymmetrik/ngx-leaflet@^17.0.0":
+  version "17.0.0"
+  resolved "https://registry.npmjs.org/@asymmetrik/ngx-leaflet/-/ngx-leaflet-17.0.0.tgz"
+  integrity sha512-Tg09780yg1pPRR7k9Z0B0Fb3Mr4SMXYfi+hii8S0McHiqiUqkB+ZhhB4hJq83v4cuvcYgZjtkz+p06lCJY/z+w==
+  dependencies:
     tslib "^2.3.0"
 
 "@auth0/angular-jwt@^5.2.0":
@@ -1296,6 +1303,13 @@
     "@babel/helper-validator-identifier" "^7.22.20"
     to-fast-properties "^2.0.0"
 
+"@bluehalo/ngx-leaflet@^19.0.0":
+  version "19.0.0"
+  resolved "https://registry.npmjs.org/@bluehalo/ngx-leaflet/-/ngx-leaflet-19.0.0.tgz"
+  integrity sha512-c1BUyDcS5QB3bwG9QUCNJLB/G3hdYQmaj37TaeCNnKUo9TViOCEhPihCXDTRAFkobbtNGXN8lGg8uD5GXv6/Zw==
+  dependencies:
+    tslib "^2.3.0"
+
 "@colors/colors@1.5.0":
   version "1.5.0"
   resolved "https://registry.npmjs.org/@colors/colors/-/colors-1.5.0.tgz"
@@ -1401,6 +1415,11 @@
   dependencies:
     call-bind "^1.0.7"
 
+"@mapbox/corslite@0.0.7":
+  version "0.0.7"
+  resolved "https://registry.npmjs.org/@mapbox/corslite/-/corslite-0.0.7.tgz"
+  integrity sha512-w/uS474VFjmqQ7fFWIMZINQM1BAQxDLuoJaZZIPES1BmeYpCtlh9MtbFxKGGDAsfvut8/HircIsVvEYRjQ+iMg==
+
 "@mapbox/jsonlint-lines-primitives@^2.0.2":
   version "2.0.2"
   resolved "https://registry.npmjs.org/@mapbox/jsonlint-lines-primitives/-/jsonlint-lines-primitives-2.0.2.tgz"
@@ -1415,6 +1434,11 @@
   version "0.1.0"
   resolved "https://registry.npmjs.org/@mapbox/point-geometry/-/point-geometry-0.1.0.tgz"
   integrity sha512-6j56HdLTwWGO0fJPlrZtdU/B13q8Uwmo18Ck2GnGgN9PCFyKTZ3UbXeEdRFh18i9XQ92eH2VdtpJHpBD3aripQ==
+
+"@mapbox/polyline@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.npmjs.org/@mapbox/polyline/-/polyline-0.2.0.tgz"
+  integrity sha512-GCddO0iw6AzOQqZgBmjEQI9Pgo40/yRgkTkikGctE01kNBN0ThWYuAnTD+hRWrAWMV6QJ0rNm4m8DAsaAXE7Pg==
 
 "@mapbox/tiny-sdf@^2.0.6":
   version "2.0.6"
@@ -2520,6 +2544,13 @@
   version "7.0.15"
   resolved "https://registry.npmjs.org/@types/json-schema/-/json-schema-7.0.15.tgz"
   integrity sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==
+
+"@types/leaflet-routing-machine@^3.2.8":
+  version "3.2.8"
+  resolved "https://registry.npmjs.org/@types/leaflet-routing-machine/-/leaflet-routing-machine-3.2.8.tgz"
+  integrity sha512-v2pJDv/nqbB769SsytHemhLkqwjVor9UdWvZ1l6Y2SEaXNt1yDwVrktc4sCT8/4n7npuEb8VP+UAk8xrPePqSQ==
+  dependencies:
+    "@types/leaflet" "*"
 
 "@types/leaflet@*", "@types/leaflet@^1.9.15":
   version "1.9.15"
@@ -5152,7 +5183,16 @@ launch-editor@^2.6.0:
     picocolors "^1.0.0"
     shell-quote "^1.8.1"
 
-leaflet@^1.0.0, leaflet@^1.9.4:
+leaflet-routing-machine@^3.2.12:
+  version "3.2.12"
+  resolved "https://registry.npmjs.org/leaflet-routing-machine/-/leaflet-routing-machine-3.2.12.tgz"
+  integrity sha512-HLde58G1YtD9xSIzZavJ6BPABZaV1hHeGst8ouhzuxmSC3s32NVtADT+njbIUMW1maHRCrsgTk/E4hz5QH7FrA==
+  dependencies:
+    "@mapbox/corslite" "0.0.7"
+    "@mapbox/polyline" "^0.2.0"
+    osrm-text-instructions "^0.13.2"
+
+leaflet@^1.0.0, leaflet@^1.9.4, leaflet@1:
   version "1.9.4"
   resolved "https://registry.npmjs.org/leaflet/-/leaflet-1.9.4.tgz"
   integrity sha512-nxS1ynzJOmOlHp+iL3FyWqK89GtNL8U8rvlMOsQdTTssxZwCXh8N2NB3GDQOL+YR3XnWyZAxwQixURb+FA74PA==
@@ -5872,6 +5912,11 @@ os-tmpdir@~1.0.2:
   version "1.0.2"
   resolved "https://registry.npmjs.org/os-tmpdir/-/os-tmpdir-1.0.2.tgz"
   integrity sha512-D2FR03Vir7FIu45XBY20mTb+/ZSWB00sjU9jdQXt83gDrI4Ztz5Fs7/yy74g2N5SVQY4xY1qDr4rNddwYRVX0g==
+
+osrm-text-instructions@^0.13.2:
+  version "0.13.4"
+  resolved "https://registry.npmjs.org/osrm-text-instructions/-/osrm-text-instructions-0.13.4.tgz"
+  integrity sha512-ge4ZTIetMQKAHKq2MwWf83ntzdJN20ndRKRaVNoZ3SkDkBNO99Qddz7r6+hrVx38I+ih6Rk5T1yslczAB6Q9Pg==
 
 p-limit@^2.2.0:
   version "2.3.0"
@@ -6844,7 +6889,9 @@ shell-quote@^1.8.1:
     "@angular/platform-server" "^17.0.0"
     "@angular/router" "^17.0.0"
     "@angular/ssr" "^17.0.6"
+    "@asymmetrik/ngx-leaflet" "^17.0.0"
     "@auth0/angular-jwt" "^5.2.0"
+    "@bluehalo/ngx-leaflet" "^19.0.0"
     "@fortawesome/fontawesome-free" "^6.5.1"
     "@ng-bootstrap/ng-bootstrap" "^16.0.0"
     "@ngx-pwa/local-storage" "^17.0.0"
@@ -6861,6 +6908,7 @@ shell-quote@^1.8.1:
     express "^4.18.2"
     font-awesome "^4.7.0"
     leaflet "^1.9.4"
+    leaflet-routing-machine "^3.2.12"
     mapbox-gl "^3.8.0"
     mapbox-gl-leaflet "^0.0.16"
     ngx-pagination "^6.0.3"

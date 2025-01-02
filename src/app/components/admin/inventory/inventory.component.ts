@@ -32,7 +32,7 @@ export class InventoryComponent implements OnInit {
   pageSize: number = 6;  // The maximum number of pages
   totalPages: number = Math.ceil(this.totalinventorys / this.inventorysPerPage);  // Total pages
   inventoryForm: FormGroup;
-  selectedWarehouse: Warehouse = { id: 0, name: '', location: '', latitude: 0,longitude:0,  createdAt: [], updatedAt: [] };
+  selectedWarehouse: Warehouse = { id: 0, name: '', location: '', address: '', latitude: 0,longitude:0,  createdAt: [], updatedAt: [] };
   selectedProduct: any;
   selectedQuantity: number = 0;
   warehouseProduct: WarehouseProduct = { warehouseId: 0, productId: 0, quantity: 0 };

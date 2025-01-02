@@ -1,5 +1,44 @@
+.map-container {
+  // position: absolute;
+  width: 100%;
+  height: 571px;
+
+}
+
+.map-frame {
+  border: 2px solid black;
+  height: 100%;
+  width: 100%;
+}
+
 #map {
-    height: 800px;
-    width: 100%;
-    max-width: 800px;
-  }
+  height: 100%;
+}
+::ng-deep .leaflet-routing-container {
+  background-color: white;
+  height: 300px;
+  width: 200px;
+  overflow-y: auto;
+}
+
+button {
+  background-color: #007bff; /* Màu nền xanh lam */
+  color: #fff; /* Màu chữ trắng */
+  padding: 10px 20px; /* Khoảng cách bên trong nút */
+  font-size: 16px; /* Kích thước chữ */
+  border: none; /* Bỏ viền */
+  border-radius: 5px; /* Bo góc */
+  cursor: pointer; /* Con trỏ chuột hiển thị tay khi hover */
+  transition: background-color 0.3s, transform 0.2s; /* Hiệu ứng hover */
+}
+
+button:hover {
+  background-color: #0056b3; /* Màu nền khi hover */
+  transform: scale(1.05); /* Phóng to nhẹ khi hover */
+}
+
+button:active {
+  background-color: #003d80; /* Màu nền khi nhấn */
+  transform: scale(0.95); /* Thu nhỏ nhẹ khi nhấn */
+}
+

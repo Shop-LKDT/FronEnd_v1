@@ -4,6 +4,7 @@ export interface Warehouse {
     id: number;
     name: string;
     location: string;
+    address: string;
     latitude: number;
     longitude: number;
 }
