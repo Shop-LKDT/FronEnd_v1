@@ -90,6 +90,7 @@ export class CategoriesComponent {
 
   ngOnInit() {
     this.userResponse = this.userService.getUserResponseFromLocalStorage();
+    this.searchProducts();
     this.route.queryParams.subscribe((params: Params) => {
       if (params['selectedCategoryId']){
 

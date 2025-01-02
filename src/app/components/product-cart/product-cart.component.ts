@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { CartService } from '../../services/cart.service';
@@ -19,6 +19,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 export class ProductCartComponent {
   @Input() product:any
+  @Output() setData = new EventEmitter<boolean>();
 
   userResponse?: UserResponse | null = null;
   products: Product[] = [];
@@ -68,11 +69,16 @@ export class ProductCartComponent {
           ? alert("Product has been added to favorites!")
           : alert("Product has been removed from favorites!");
         // this.snackBar.open(message, 'Close', { duration: 3000 });
+        this.setMessage(true);
       },
       error: (err) => {
         console.error('Error toggling favorite:', err);
         alert('An error occurred. Please try again.');
       },
     });
+  }
+  setMessage(data: boolean) {
+    console.log(data);
+    this.setData.emit(data);
   }
 }

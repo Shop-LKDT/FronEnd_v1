@@ -1,9 +1,10 @@
+<app-header></app-header>
 <div class="favorite-products-container" *ngIf="!isLoading; else loading">
   <h2 class="title">Sản Phẩm Yêu Thích</h2>
 
   <ng-container *ngIf="products.length > 0; else noProducts">
     <div class="products-grid">
-      <app-product-cart
+      <app-product-cart (setData)="getMessage($event)"
         *ngFor="let product of products"
         [product]="product"
       ></app-product-cart>
@@ -13,7 +14,7 @@
   <ng-template #noProducts>
     <div class="no-products-message">
       <p>Bạn chưa có sản phẩm yêu thích nào.</p>
-      <button (click)="router.navigate(['/products'])">Khám Phá Sản Phẩm</button>
+      <button (click)="router.navigate(['/categories'])">Khám Phá Sản Phẩm</button>
     </div>
   </ng-template>
 </div>

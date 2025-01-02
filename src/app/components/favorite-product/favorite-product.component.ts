@@ -10,11 +10,12 @@ import { ProductService } from '../../services/product.service';
 import { CommonModule } from '@angular/common';
 import { environment } from '../../../environments/environment';
 import { ProductCartComponent } from '../product-cart/product-cart.component';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-favorite-product',
   standalone: true,
-  imports: [ProductCartComponent, CommonModule],
+  imports: [ProductCartComponent, CommonModule, HeaderComponent],
   templateUrl: './favorite-product.component.html',
   styleUrls: ['./favorite-product.component.scss']
 })
@@ -23,6 +24,7 @@ export class FavoriteProductComponent implements OnInit {
   favorites: Favorite[] = [];
   products: Product[] = [];
   isLoading = true;
+  delete = false;
 
   constructor(
     public router: Router, // Thay đổi từ private sang public
@@ -78,5 +80,11 @@ export class FavoriteProductComponent implements OnInit {
         this.isLoading = false;
       },
     });
+  }
+  getMessage(value: boolean){
+    this.delete = value ;
+    if (this.delete){
+      this.loadFavorites();
+    }
   }
 }
