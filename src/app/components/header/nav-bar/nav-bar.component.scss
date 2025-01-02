@@ -1,0 +1,27 @@
+.navbar {
+  background-color: rgba(0, 0, 0, 0) !important;
+}
+
+.navbar .container {
+  background-color: rgba(255, 182, 182, 0) !important;
+}
+
+.navbar .container .navbar-brand {
+  color: rgb(173, 178, 203);
+  cursor: pointer !important;
+  
+}
+.navbar .container .navbar-brand :hover {
+  color: rgb(78, 79, 87) !important;
+}
+
+.navbar .container .navbar-nav .nav-link {
+  color: rgb(173, 178, 203);
+  border-radius: 18px;
+  padding: 8px 16px;
+}
+hr {
+  margin: 0;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}

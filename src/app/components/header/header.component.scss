@@ -1,247 +1,167 @@
-@import '../../styles/shared-styles.scss';
+// Variables
+$primary-color: #e30019;
+$secondary-color: #4a58db;
+$text-color: #333;
+$border-color: #e0e0e0;
+$white: #fff;
+$hover-color: #4337dd;
 
-header {
-    background-color: rgba(255, 182, 182, 0) !important;
-    color: rgb(173, 178, 203);
-    border-bottom: 1px solid rgb(100, 98, 98);
-}
-
-.navbar {
-    background-color: rgba(0, 0, 0, 0) !important;
-}
-
-.navbar .container {
-    background-color: rgba(255, 182, 182, 0) !important;
-}
-
-.navbar .container .navbar-brand {
-    color: rgb(173, 178, 203);
-}
-
-.navbar .container .navbar-nav .nav-link {
-    color: rgb(173, 178, 203);
-    border-radius: 18px;
-    padding: 8px 16px;
-}
-
-.search-box {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
-}
+// Header Styles
 .main-header {
-background-color: #E30019;
-padding: 10px 20px;
-display: flex;
-align-items: center;
-justify-content: space-between;
+  background-color: $primary-color;
+  padding: 10px 100px !important;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
+// Logo
 .logo {
-width: 150px;
-margin-left: 200px;
+  width: 70px;
+  height: auto;
+  cursor: pointer;
 }
 
-.category {
-display: flex;
-align-items: center;
-padding: 8px 15px;
-border: none;
-border-radius: 5px;
-font-size: 15px;
-cursor: pointer;
-font-weight: bolder;
-transition: background-color 0.3s
+// Category Select
+.category-container {
+  .product-category {
+    width: 100px;
+    padding: 0.5rem;
+    border-radius: 4px;
+    border: 1px solid $white;
+    background-color: $white;
+    cursor: pointer;
+    
+    option {
+      background-color: $white;
+      padding: 0.5rem;
+    }
+  }
 }
 
-.category svg {
-margin-right: 5px;
-}
-
+// Search Section
 .search-container {
-flex: 1;
-display: flex;
-justify-content: center;
-align-items: center;
+  flex: 1;
+  max-width: 450px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  .search-input {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border: 1px solid $white;
+    border-radius: 4px;
+    outline: none;
+    
+    &::placeholder {
+      color: rgba($text-color, 0.6);
+    }
+  }
+
+  button {
+    padding: 0.5rem 1rem;
+    border: 1px solid $white;
+    border-radius: 4px;
+    background-color: $white;
+    color: $text-color;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: darken($white, 10%);
+    }
+  }
 }
 
-.search-box {
-display: flex;
-align-items: center;
-border: 1px solid #E30019;
-border-radius: 20px;
-padding: 5px 15px;
-width: 100%;
-max-width: 600px;
-background-color: rgb(173, 178, 203);
+// Branch Section
+.branch {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: $white;
+
+  i {
+    font-size: 1.2rem;
+  }
+
+  p {
+    margin: 0;
+    font-weight: 500;
+  }
 }
 
-.search-box input[type="text"] {
-border: none;
-outline: none;
-padding: 5px;
-width: 100%;
-font-size: 14px;
-}
-
-.search-box button {
-background-color: transparent;
-border: none;
-cursor: pointer;
-}
-
+// Utility Icons
 .utility-icons {
-display: flex;
-align-items: center;
-gap: 15px;
-}
-
-.utility-item {
-display: flex;
-align-items: center;
-color: white;
-font-size: 14px;
-font-weight: bolder;
-cursor: pointer;
-}
-
-.btncl {
-margin-left: 60px;
-background-color: #BE1529;
-padding: 5px;
-color: black;
-font-weight: 500;
-border-radius: 5px;
-display: inline-block;
-}
-
-.utility-item svg {
-margin-right: 5px;
-}
-.product-category {
-  width: 200px;
-  cursor: pointer;
-}
-.product-category option{
-  background-color: $shopapp-color !important;
-  cursor: pointer;
-
-}
-
-.search-input {
-  width: 300px;
-  background-color: $shopapp-background-color;
-  margin-right: 10px;
-  border-color: rgba(255, 255, 255, 0.5);
-  color: black;
-}
-
-// .nav-item:not(:first-child) {
-//     margin-left: 10px; /* hoặc giá trị khoảng cách bạn muốn giữa các phần tử */
-// }
-.submenu ul {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  background-color: white;
-  border-bottom: 1px solid #e0e0e0;
-}
-
-.submenu li {
   display: flex;
   align-items: center;
-}
+  gap: 1.5rem;
 
-.submenu .separator {
-  color: #e0e0e0;
-  margin: 0 10px;
-}
-
-.submenu a {
-  display: flex;
-  align-items: center;
-  color: #333;
-  text-decoration: none;
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-}
-
-.submenu a:hover {
-  color: #000;
-}
-
-.submenu svg {
-  margin-right: 8px;
-}
-
-.submenu .text {
-  font-size: 14px;
-}
-
-
-
-
-
-
-
-.sub-header {
-  background: #E30019;
-  border-bottom: 1px solid #E30019;
-  position: relative;
-  z-index: 1; }
-  @media (min-width: 992px) {
-    .sub-header {
-      background: #ffffff;
-      border-bottom: 1px solid #E0E0E0; } }
-
-.nav-item:nth-child(4){
-    position: absolute;
-    right: 100px;
+  .utility-item {
     display: flex;
     align-items: center;
+    gap: 0.5rem;
+    color: $white;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: rgba($white, 0.1);
+    }
+
+    &.active {
+      background-color: rgba($white, 0.2);
+    }
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .nav-link {
+      color: $white;
+      text-decoration: none;
+      font-weight: 500;
+    }
+  }
 }
-.navbar .container .navbar-nav .nav-link.active {
-    background-color: $shopapp-color !important;
-    color: black !important;
-}
-.nav-item.active {
-    background-color: $shopapp-color !important;
-    color: black !important;
-}
-// .navbar-item{
-//     display: flex;
-// }
-/* Add this CSS to your project's stylesheet */
-.nav-item:hover{
-    background-color: #333;
-    border-radius: 17px ;
-}
+
+// Popover Styles
 .popover-list {
-    padding: 10px;
-    cursor: pointer;
-}
-.popover-body {
-    padding: 0px;
-}
-.popover-item {
+  padding: 0.5rem 0;
+  min-width: 200px;
+
+  .popover-item {
     display: block;
-    margin-bottom: 5px;
+    padding: 0.5rem 1rem;
+    color: $text-color;
     text-decoration: none;
-    color: #333;
-    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: rgba($primary-color, 0.1);
+      color: $primary-color;
+    }
+  }
 }
-.nav-item{
-    cursor: pointer;
-}
-.popover-item{
-    cursor: pointer;
-}
-.popover-item:hover {
-    background-color: #f0f0f0;
-    color: $shopapp-color;
-    cursor: pointer;
+
+// Responsive
+@media (max-width: 991px) {
+  .main-header {
+    padding: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .search-container {
+    order: 3;
+    width: 100%;
+    max-width: none;
+    margin-top: 1rem;
+  }
 }

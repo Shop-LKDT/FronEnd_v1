@@ -21,13 +21,14 @@ import {
 } from '@angular/common/http';
 import { LoginDTO } from './../../dtos/user/login.dto';
 import { FormsModule } from '@angular/forms';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   standalone: true,
-  imports: [CommonModule, NgbModule, RouterModule, FormsModule],
+  imports: [CommonModule, NgbModule, RouterModule, FormsModule, NavBarComponent],
 })
 export class HeaderComponent implements OnInit {
   userResponse?: UserResponse | null;
