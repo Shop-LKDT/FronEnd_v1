@@ -143,7 +143,7 @@ export class OrderComponent implements OnInit {
         // Nếu phương thức thanh toán không phải vnpay, gọi API để tạo đơn hàng bình thường
         this.orderService.placeOrder(this.orderData).subscribe({
           next: (response: ApiResponse) => {
-            alert('Order placed successfully.');
+            alert('Đặt thành công');
             this.cartService.clearCart();
             this.saveProductsToLocalStorage();
             this.router.navigate(['/']);
