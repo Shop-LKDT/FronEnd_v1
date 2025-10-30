@@ -132,7 +132,7 @@ export class InventoryComponent implements OnInit {
         if (response.status === 'CREATED') {
           alert('Sản phẩm đã được thêm thành công');
           this.getAllProductsNotInWarehouse(warehouseProduct.warehouseId); // Làm mới danh sách sản phẩm
-          this.getData(); // Làm mới danh sách kho lưu trữ
+          this.getData(); // Làm mới danh sách Cửa hàng chi nhánh
           this.warehouseProduct = { warehouseId: 0, productId: 0, quantity: 0 }; // Reset form// Reset form
         } else {
           alert('Thêm sản phẩm thất bại');
@@ -144,7 +144,7 @@ export class InventoryComponent implements OnInit {
       }
     );
   }
-  // Sự kiện khi thay đổi kho lưu trữ
+  // Sự kiện khi thay đổi Cửa hàng chi nhánh
   onWarehouseChange(event: any): void {
     const warehouseId = event.target.value;
     if (warehouseId ) {
@@ -206,16 +206,16 @@ export class InventoryComponent implements OnInit {
         (response: ApiResponse) => {
           console.log('Delete response:', response);
           if (response.status === 'OK') {
-            alert('Kho lưu trữ đã được xóa thành công');
+            alert('Cửa hàng chi nhánh đã được xóa thành công');
             this.getData(); // Làm mới danh sách sau khi xóa
           } else {
-            alert('Không thể xóa kho lưu trữ');
+            alert('Không thể xóa Cửa hàng chi nhánh');
           }
 
         },
         (error) => {
           console.error('Error deleting inventory:', error);
-          alert('Đã xảy ra lỗi khi xóa kho lưu trữ.');
+          alert('Đã xảy ra lỗi khi xóa Cửa hàng chi nhánh.');
 
         }
       );

@@ -1,18 +1,18 @@
 @if(updatedCategory) {
-  <div>      
+  <div style="margin-top: 50px;">      
     <!-- Form cập nhật thông tin sản phẩm -->
     <div class="container">
       <div class="row" style="color: black;">
         <div class="col-md-6 offset-md-3">
-          <h3>Update Category</h3>
+          <h3>Cập Nhật danh mục</h3>
           <form (ngSubmit)="updateCategory()">
             <div class="form-group mb-3">
-              <label for="name">Name:</label>
+              <label for="name">Tên:</label>
               <input type="text" id="name" 
                 [(ngModel)]="updatedCategory.name" 
                 name="name" class="form-control" required>
             </div>                  
-            <button type="submit" class="btn btn-primary">Update</button>
+            <button type="submit" class="btn btn-primary">Cập nhật</button>
           </form>
         </div>
       </div>

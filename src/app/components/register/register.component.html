@@ -1,114 +1,63 @@
-<div class="container">
+<app-header></app-header>
+<div class="container mx-auto px-4">
   <form #registerForm="ngForm">
-    <div class="row">
-      <div class="" style="
-        margin-left: 15%;
-    ">
-        <div class="" style="border: 1px solid;
-            padding: 30px;
-            border-radius: 10px;
-            width: 1000px;
-            height: 100%;">
-          <h4 class="h1" style="font-weight: 600;
-              line-height: 20px;
-              margin-top: 20px;
-              margin-bottom: 50px;
-              text-align: center;">ĐĂNG KÝ TÀI KHOẢN</h4>
-          <div class="form-group">
-            <label for="phoneNumber" style="font-size: 20px;">Số điện thoại</label>
-            <input style="border: 1px solid black;" type="text" class="form-control" [(ngModel)]="phoneNumber"
-              (input)="onPhoneNumberChange()" name="phone" (focus)="registerForm.form.markAsTouched()" required
-              id="phoneNumber" placeholder="Nhập số điện thoại">
-            <div class="divider-nospace"></div>
-            @if(phoneNumber.length < 10 && registerForm.form.touched) { <p class="text-danger">Số điện thoại phải đủ 10
-              số</p>
-              }
-
-          </div>
-          <div class="mt-3"></div>
-          <div class="form-group password-field">
-            <label for="password" style="font-size: 20px;">Mật khẩu</label>
-            <input style="border: 1px solid black;" type="password" [(ngModel)]="password" name="password"
-              placeholder="Ít nhất 3 ký tự" required class="form-control" id="password">
-            <i style="margin-top: 15px;" class="password-toggle fas" [ngClass]="showPassword ?
-                        'fa-eye' : 'fa-eye-slash'" (click)="togglePassword()">
-            </i>
-            <div class="divider-nospace"></div>
-            @if(password.length < 3 && registerForm.form.touched) { <p class="text-danger">
-              Password must be at least 3 characters long
-              </p>
-              }
-          </div>
-          <div class="mt-3"></div>
-          <div class="form-group password-field">
-            <label for="retype-password" style="font-size: 20px;">Nhập lại mật khẩu</label>
-            <input style="border: 1px solid black;" type="password" placeholder="Ít nhất 3 ký tự"
-              [(ngModel)]="retypePassword" name="retypePassword"
-              (input)="registerForm.form.markAsTouched(); checkPasswordsMatch()" required class="form-control"
-              id="retype-password">
-            <i style="margin-top: 15px;" class="password-toggle fas" [ngClass]="showPassword ?
-                        'fa-eye' : 'fa-eye-slash'" (click)="togglePassword()">
-            </i>
-            <div class="divider-nospace"></div>
-            @if(retypePassword.length < 3 && registerForm.form.touched) { <p class="text-danger">
-              Password must be at least 3 characters long
-              </p>
-              }
-              @if(registerForm.controls['retypePassword'].hasError('passwordMismatch')
-              && registerForm.form.touched) {
-              <p class="text-danger">
-                Password no match
-              </p>
-              }
-
-          </div>
-          <div class="mt-3"></div>
-          <div class="form-group">
-            <label for="full-name" style="font-size: 20px;">Họ và Tên</label>
-            <input style="border: 1px solid black;" type="text" [(ngModel)]="fullName" name="fullName"
-              class="form-control" required id="full-name">
-            <div class="divider-nospace"></div>
-          </div>
-          <div class="form-group">
-            <label for="date-of-birth" style="font-size: 20px;">Ngày tháng năm sinh</label>
-            <!-- Thêm [(ngModel)] để thực hiện 2-way data binding -->
-            <input style="border: 1px solid black;" type="date" class="form-control" required id="date-of-birth"
-              [(ngModel)]="dateOfBirth" name="dateOfBirth" (input)="registerForm.form.markAsTouched(); checkAge()">
-
-            <div class="divider-nospace"></div>
-            @if(registerForm.controls['dateOfBirth'].hasError('invalidAge')
-            && registerForm.form.touched){
-            <p class="text-danger">
-              You are under the age of 18
-            </p>
-            }
-          </div>
-
-          <div class="mt-3"></div>
-          <div class="form-group">
-            <label for="address" style="font-size: 20px;">Địa chỉ</label>
-            <input style="border: 1px solid black;" type="text" [(ngModel)]="address" name="address"
-              class="form-control" id="address">
-            <div class="divider-nospace"></div>
-          </div>
-          <div class="form-group">
-            <div class="form-check checkbox-text">
-              <span style="display: flex;">
-                <input type="checkbox" [(ngModel)]="isAccepted" name="isAccepted" class="form-check-input" id="agree">
-                <label class="form-check-label text-start" for="agree" style="font-size: 20px;">
-                  Tôi chấp nhận đồng ý các <a href="#">điều khoản</a></label>
-              </span>
-            </div>
-          </div>
-          <button type="button" (click)="register()" class="register-button"
-            style="background-color: #E30019; border-radius: 5px; color: white; margin-bottom: 10px;">Đăng Ký</button>
-          <div class="divider"></div>
-          <p class="text-center" style="font-size: 20px;">Bạn đã có tài khoản? <span>
-              <a class="register-link" (click)="Tologin()" style="font-size: 20px; color:blue;">Đăng nhập tại
-                đây</a></span></p>
+    <div class="flex justify-center">
+      <div class="w-full max-w-3xl bg-white shadow-lg rounded-lg p-8">
+        <h4 class="text-3xl font-bold text-gray-800 text-center mb-10">ĐĂNG KÝ TÀI KHOẢN</h4>
+        <div class="form-group">
+          <label for="phoneNumber" class="text-lg font-medium text-gray-700">Số điện thoại</label>
+          <input type="text" class="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" [(ngModel)]="phoneNumber" (input)="onPhoneNumberChange()" name="phone" (focus)="registerForm.form.markAsTouched()" required id="phoneNumber" placeholder="Nhập số điện thoại">
+          @if(phoneNumber.length < 10 && registerForm.form.touched) {
+            <p class="text-red-500 text-sm mt-2">Số điện thoại phải đủ 10 số</p>
+          }
         </div>
+        <div class="form-group mt-6">
+          <label for="password" class="text-lg font-medium text-gray-700">Mật khẩu</label>
+          <div class="relative">
+            <input type="password" class="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" [(ngModel)]="password" name="password" placeholder="Ít nhất 3 ký tự" required id="password">
+            <i class="absolute top-3 right-3 cursor-pointer text-gray-500" [ngClass]="showPassword ? 'fa-eye' : 'fa-eye-slash'" (click)="togglePassword()"></i>
+          </div>
+          @if(password.length < 3 && registerForm.form.touched) {
+            <p class="text-red-500 text-sm mt-2">Mật khẩu phải ít nhất 3 ký tự</p>
+          }
+        </div>
+        <div class="form-group mt-6">
+          <label for="retype-password" class="text-lg font-medium text-gray-700">Nhập lại mật khẩu</label>
+          <div class="relative">
+            <input type="password" class="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ít nhất 3 ký tự" [(ngModel)]="retypePassword" name="retypePassword" (input)="registerForm.form.markAsTouched(); checkPasswordsMatch()" required id="retype-password">
+            <i class="absolute top-3 right-3 cursor-pointer text-gray-500" [ngClass]="showPassword ? 'fa-eye' : 'fa-eye-slash'" (click)="togglePassword()"></i>
+          </div>
+          @if(retypePassword.length < 3 && registerForm.form.touched) {
+            <p class="text-red-500 text-sm mt-2">Mật khẩu phải ít nhất 3 ký tự</p>
+          }
+          @if(registerForm.controls['retypePassword'].hasError('passwordMismatch') && registerForm.form.touched) {
+            <p class="text-red-500 text-sm mt-2">Password no match</p>
+          }
+        </div>
+        <div class="form-group mt-6">
+          <label for="full-name" class="text-lg font-medium text-gray-700">Họ và Tên</label>
+          <input type="text" class="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" [(ngModel)]="fullName" name="fullName" required id="full-name">
+        </div>
+        <div class="form-group mt-6">
+          <label for="date-of-birth" class="text-lg font-medium text-gray-700">Ngày tháng năm sinh</label>
+          <input type="date" class="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" [(ngModel)]="dateOfBirth" name="dateOfBirth" (input)="registerForm.form.markAsTouched(); checkAge()" required id="date-of-birth">
+          @if(registerForm.controls['dateOfBirth'].hasError('invalidAge') && registerForm.form.touched) {
+            <p class="text-red-500 text-sm mt-2">You are under the age of 18</p>
+          }
+        </div>
+        <div class="form-group mt-6">
+          <label for="address" class="text-lg font-medium text-gray-700">Địa chỉ</label>
+          <input type="text" class="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" [(ngModel)]="address" name="address" id="address">
+        </div>
+        <div class="form-group mt-6">
+          <div class="flex items-center">
+            <input type="checkbox" [(ngModel)]="isAccepted" name="isAccepted" class="mr-2 h-5 w-5 text-blue-500 focus:ring-blue-500 rounded" id="agree">
+            <label for="agree" class="text-gray-700">Tôi chấp nhận đồng ý các <a href="#" class="text-blue-500 underline">điều khoản</a></label>
+          </div>
+        </div>
+        <button type="button" (click)="register()" class="w-full py-3 mt-8 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">Đăng Ký</button>
+        <p class="text-center mt-6 text-gray-700">Bạn đã có tài khoản? <a class="text-blue-500 underline cursor-pointer" (click)="Tologin()">Đăng nhập tại đây</a></p>
       </div>
     </div>
   </form>
 </div>
-<app-footer></app-footer>

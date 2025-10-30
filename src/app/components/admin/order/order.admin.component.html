@@ -1,104 +1,192 @@
-<h1 class="text-4xl font-semibold text-center text-gray-800 mb-8">Quản lý đơn đặt hàng</h1>
+<!-- Cần đảm bảo có các icon fontawesome hoặc heroicons đã được import -->
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
+  <h1 class="text-4xl font-extrabold text-gray-900 text-center mb-10">Quản lý Đơn đặt hàng</h1>
 
-<div class="mx-auto px-4">
-  <!-- Search Bar Section -->
-  <div class="flex justify-between mb-6 items-center" style="margin-top: 30px;">
-    <div class="w-full md:w-8/12 px-2">
-      <input
-        class="search-input shadow rounded-lg w-full py-3 px-5 leading-tight focus:outline-none focus:ring-2 focus:ring-gold"
-        type="text" placeholder="Tìm kiếm Đơn Hàng" [(ngModel)]="keyword" />
+  <!-- Search & Filter Section -->
+  <div class="flex flex-col sm:flex-row justify-between gap-4 mb-8">
+    <!-- Search Input -->
+    <div class="w-full sm:w-8/12">
+      <div class="relative">
+        <input
+          class="shadow-md rounded-xl w-full py-3 pl-12 pr-5 leading-tight text-gray-700 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition duration-200"
+          type="text"
+          placeholder="Tìm kiếm theo Mã/Tên/SĐT..."
+          [(ngModel)]="keyword"
+        />
+        <i
+          class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
+        ></i>
+      </div>
     </div>
-    <div class="w-full md:w-4/12 px-2">
-      <button class="search-button bg-gold text-white font-semibold py-3 px-6 rounded-lg w-full" (click)="searchOrders()">
-        <i class="fa fa-search"></i>
+
+    <!-- Filter Button (Example) -->
+    <div class="w-full sm:w-4/12 flex space-x-2">
+      <button
+        class="bg-indigo-600 text-white font-semibold py-3 px-6 rounded-xl shadow-md hover:bg-indigo-700 transition duration-200 w-full sm:w-auto flex-shrink-0"
+        (click)="searchOrders()"
+      >
+        Tìm kiếm
+      </button>
+      <button
+        class="bg-white text-indigo-600 border border-indigo-600 font-semibold py-3 px-4 rounded-xl shadow-md hover:bg-indigo-50 transition duration-200 w-full sm:w-auto"
+        (click)="searchOrders()"
+      >
+        <i class="fas fa-filter mr-2"></i>Lọc
       </button>
     </div>
   </div>
 
-  <!-- Orders Table -->
-  <div class="contents-div shadow-lg rounded-3xl bg-white">
-    <table class="table-auto w-full border-collapse">
-      <thead>
-        <tr class="text-white text-center" style="background-color: #5b5d8f;">
-          <th class="px-6 py-4 border">Mã đơn hàng</th>
-          <th class="px-6 py-4 border">Mã người dùng</th>
-          <th class="px-6 py-4 border">Tên người dùng</th>
-          <th class="px-6 py-4 border">Email</th>
-          <th class="px-6 py-4 border">Số điện thoại</th>
-          <th class="px-6 py-4 border">Địa chỉ</th>
-          <th class="px-6 py-4 border">Ghi chú</th>
-          <th class="px-6 py-4 border">Ngày đặt hàng</th>
-          <th class="px-6 py-4 border">Trạng thái</th>
-          <th class="px-6 py-4 border">Tổng tiền</th>
-          <th class="px-6 py-4 border">Thao tác</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Loop through orders -->
-        @for (order of orders; track order.id) {
-        <tr class="text-gray-700 hover:bg-gray-50">
-          <td class="px-6 py-4 border">{{ order.id }}</td>
-          <td class="px-6 py-4 border">{{ order.user_id }}</td>
-          <td class="px-6 py-4 border">{{ order.fullname }}</td>
-          <td class="px-6 py-4 border">{{ order.email }}</td>
-          <td class="px-6 py-4 border">{{ order.phone_number }}</td>
-          <td class="px-6 py-4 border">{{ order.address }}</td>
-          <td class="px-6 py-4 border">{{ order.note }}</td>
-          <td class="px-6 py-4 border">{{ order.order_date | date }}</td>
-          <td class="px-6 py-4 border">{{ order.status }}</td>
-          <td class="px-6 py-4 border">{{ order.total_money | number: '1.0-2' }}</td>
-          <td class="px-6 py-4 border">
-            <div class="flex space-x-4 justify-center">
-              <button class="bg-gold hover:bg-gold-dark text-black font-bold py-2 px-4 rounded"
-                (click)="viewDetails(order)">
-                Xem chi tiết
+  <!-- Orders Table Container (The main card) -->
+  <div class="bg-white p-2 sm:p-4 rounded-2xl shadow-xl border border-gray-100">
+    <div class="overflow-x-auto rounded-xl border border-gray-200">
+      <table class="min-w-full divide-y divide-gray-200">
+        <!-- Table Header -->
+        <thead class="bg-indigo-600">
+          <tr>
+            <th
+              class="px-4 py-3 text-white text-xs font-semibold tracking-wider text-left rounded-tl-xl"
+            >
+              Mã ĐH
+            </th>
+            <th class="px-4 py-3 text-white text-xs font-semibold tracking-wider text-left">
+              Tên KH
+            </th>
+            <th class="px-4 py-3 text-white text-xs font-semibold tracking-wider text-left">SĐT</th>
+            <th class="px-4 py-3 text-white text-xs font-semibold tracking-wider text-left">
+              Địa chỉ
+            </th>
+            <th class="px-4 py-3 text-white text-xs font-semibold tracking-wider text-left">
+              Ngày đặt
+            </th>
+            <th class="px-4 py-3 text-white text-xs font-semibold tracking-wider text-center">
+              Trạng thái
+            </th>
+            <th class="px-4 py-3 text-white text-xs font-semibold tracking-wider text-right">
+              Tổng tiền
+            </th>
+            <th
+              class="px-4 py-3 text-white text-xs font-semibold tracking-wider text-center rounded-tr-xl"
+            >
+              Thao tác
+            </th>
+          </tr>
+        </thead>
+
+        <!-- Table Body -->
+        <tbody class="bg-white divide-y divide-gray-100">
+          @for (order of orders; track order.id) {
+          <tr class="transition-colors duration-150 hover:bg-indigo-50/50">
+            <td class="p-4 whitespace-nowrap text-sm font-medium text-gray-800">{{ order.id }}</td>
+            <td class="p-4 whitespace-nowrap text-sm text-gray-700" title="{{ order.email }}">
+              {{ order.fullName }}
+            </td>
+            <td class="p-4 whitespace-nowrap text-sm text-gray-700">{{ order.phone_number }}</td>
+            <td class="p-4 text-sm text-gray-700 max-w-xs truncate" title="{{ order.address }}">
+              {{ order.address }}
+            </td>
+            <td class="p-4 whitespace-nowrap text-sm text-gray-700">
+              {{ order.order_date | date : 'dd/MM/yyyy' }}
+            </td>
+
+            <!-- Status Badge (Dễ nhìn hơn) -->
+            <td class="p-4 whitespace-nowrap text-center">
+              <!-- Cần hàm hoặc logic [ngClass] để xác định màu sắc dựa trên order.status -->
+              <span
+                class="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium"
+                [ngClass]="{
+                  'bg-green-100 text-green-800': order.status === 'Delivered',
+                  'bg-yellow-100 text-yellow-800': order.status === 'Processing',
+                  'bg-blue-100 text-blue-800': order.status === 'New',
+                  'bg-red-100 text-red-800': order.status === 'Cancelled'
+                }"
+              >
+                {{ order.status }}
+              </span>
+            </td>
+
+            <!-- Total Money -->
+            <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-800 text-right">
+              {{ order.total_money | number : '1.0-0' }} VNĐ
+            </td>
+
+            <!-- Action Buttons (Dễ thao tác hơn) -->
+            <td class="p-4 whitespace-nowrap text-center space-x-2">
+              <!-- View Details Button -->
+              <button
+                title="Xem chi tiết đơn hàng"
+                class="p-2 rounded-full bg-indigo-500 text-white hover:bg-indigo-600 shadow-md transition-colors duration-200"
+                (click)="viewDetails(order)"
+              >
+                <i class="fas fa-eye"></i>
+                <!-- Icon chi tiết -->
               </button>
-              <button class="bg-gray-100 hover:bg-gray-300 text-white font-medium py-2 px-4 rounded flex items-center justify-center"
-                (click)="deleteOrder(order.id)">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#5b5d8f" class="h-5 w-5">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v2m4 0H7m10 0h-3" />
-                </svg>
+
+              <!-- Delete Button -->
+              <button
+                title="Xóa đơn hàng"
+                class="p-2 rounded-full bg-white text-red-500 border border-red-500 hover:bg-red-50 transition-colors duration-200"
+                (click)="deleteOrder(order.id)"
+              >
+                <i class="fas fa-trash-alt"></i>
+                <!-- Icon xóa -->
               </button>
-            </div>
-          </td>
-        </tr>
-        }
-      </tbody>
-    </table>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
   </div>
 
-  <!-- Pagination -->
-  <div class="d-flex justify-content-center mt-6">
-    <nav aria-label="Page navigation">
-      <ul class="pagination">
-        @if(currentPage > 0) {
-          <li class="page-item">
-            <a class="page-link" (click)="onPageChange(0)">First</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" (click)="onPageChange(currentPage - 1)">
-              <i class="fa fa-chevron-left"></i>
-            </a>
-          </li>
-        }
-        @for(page of visiblePages; track page) {
-        <ng-container>
-          <li class="page-item" [ngClass]="{'active': page === currentPage + 1}">
-            <a class="page-link" (click)="onPageChange(page - 1)">{{ page }}</a>
-          </li>
-        </ng-container>
-        }
-        @if(currentPage < totalPages - 1) {
-          <li class="page-item">
-            <a class="page-link" (click)="onPageChange(currentPage + 1)">
-              <i class="fa fa-chevron-right"></i>
-            </a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" (click)="onPageChange(totalPages - 1)">Last</a>
-          </li>
-        }
-      </ul>
+  <!-- Pagination (Tailwind CSS style) -->
+  <div class="flex justify-center mt-8">
+    <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+      <!-- First/Previous Buttons -->
+      @if(currentPage > 0) {
+      <button
+        class="relative inline-flex items-center px-3 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+        (click)="onPageChange(0)"
+      >
+        <i class="fas fa-angle-double-left"></i>
+      </button>
+      <button
+        class="relative inline-flex items-center px-3 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+        (click)="onPageChange(currentPage - 1)"
+      >
+        <i class="fas fa-angle-left"></i>
+      </button>
+      }
+
+      <!-- Page Numbers -->
+      @for(page of visiblePages; track page) {
+      <button
+        class="relative inline-flex items-center px-4 py-2 border text-sm font-medium transition duration-150"
+        [ngClass]="
+          page === currentPage + 1
+            ? 'z-10 bg-indigo-50 border-indigo-500 text-indigo-600'
+            : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-50'
+        "
+        (click)="onPageChange(page - 1)"
+      >
+        {{ page }}
+      </button>
+      }
+
+      <!-- Next/Last Buttons -->
+      @if(currentPage < totalPages - 1) {
+      <button
+        class="relative inline-flex items-center px-3 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+        (click)="onPageChange(currentPage + 1)"
+      >
+        <i class="fas fa-angle-right"></i>
+      </button>
+      <button
+        class="relative inline-flex items-center px-3 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+        (click)="onPageChange(totalPages - 1)"
+      >
+        <i class="fas fa-angle-double-right"></i>
+      </button>
+      }
     </nav>
   </div>
 </div>

@@ -41,7 +41,7 @@ export class OrderComponent implements OnInit {
   orderData: OrderDTO = {
     order_id: 0,
     user_id: 0,
-    fullname: '',
+    fullName: '',
     email: '',
     phone_number: '',
     address: '',
@@ -65,7 +65,7 @@ export class OrderComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {
     this.orderForm = this.formBuilder.group({
-      fullname: ['', Validators.required],
+      fullName: ['', Validators.required],
       email: ['', [Validators.email]],
       phone_number: ['', [Validators.required, Validators.minLength(6)]],
       address: ['', [Validators.required, Validators.minLength(5)]],
@@ -247,7 +247,7 @@ export class OrderComponent implements OnInit {
       const customerInfo = JSON.parse(savedCustomerInfo);
       this.orderData = {
         ...this.orderData,
-        fullname: customerInfo.fullname,
+        fullName: customerInfo.fullName,
         email: customerInfo.email,
         phone_number: customerInfo.phone_number,
         address: customerInfo.address,

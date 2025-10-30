@@ -12,20 +12,20 @@
     <div class="col-md-3 mx-auto">
       <h2 class="product-header">User Information</h2>
       <div class="mb-3">
-        <label for="fullname" class="form-label">Full Name</label>
+        <label for="fullName" class="form-label">Full Name</label>
         <input
           type="text"
-          formControlName="fullname"
+          formControlName="fullName"
           class="form-control"
-          id="fullname"
+          id="fullName"
           [class.is-invalid]="
-            userProfileForm.get('fullname')!.invalid &&
-            userProfileForm.get('fullname')!.touched
+            userProfileForm.get('fullName')!.invalid &&
+            userProfileForm.get('fullName')!.touched
           "
         />
         @if (
-          userProfileForm.get("fullname")!.invalid &&
-          userProfileForm.get("fullname")!.touched
+          userProfileForm.get("fullName")!.invalid &&
+          userProfileForm.get("fullName")!.touched
         ) {
           <div class="invalid-feedback">Full Name is required.</div>
         }

@@ -58,7 +58,7 @@ export class UpdateUserComponent implements OnInit{
   
   checkExistPhoneNumber: boolean = false;
   registerDto: RegisterDTO = {
-    fullname : '',
+    fullName : '',
     phone_number : '0',
     password : '0',
     retype_password : '0',
@@ -83,7 +83,7 @@ export class UpdateUserComponent implements OnInit{
 
   ) {
     this.userProfileForm = this.formBuilder.group({
-      fullname: [''],
+      fullName: [''],
       // email: ['', [Validators.email]],
       phone_number: ['', Validators.minLength(6)],
       password: ['', Validators.minLength(3)],
@@ -199,7 +199,7 @@ export class UpdateUserComponent implements OnInit{
             ;
             this.avatar = response.picture;
             this.registerDto.email = response.email;
-            this.registerDto.fullname = "";
+            this.registerDto.fullName = "";
             this.registerDto.date_of_birth = this.userProfileForm.get('date_of_birth')?.value;
             this.registerDto.password = this.userProfileForm.get('password')?.value;
             this.registerDto.address = this.userProfileForm.get('address')?.value;

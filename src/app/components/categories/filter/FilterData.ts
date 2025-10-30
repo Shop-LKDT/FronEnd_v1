@@ -19,6 +19,7 @@ export const filterBrand = [
         id: "selectedCategoryId",
         name: "Loại ",
         option: [
+            { value: "17", label: "Điện thoại" },
             { value: "1", label: "PC Bán Chạy" },
             { value: "2", label: "Bàn Phím" },
             { value: "3", label: "Tai nghe" },

@@ -12,7 +12,7 @@ export class OrderDTO {
   order_id: number;
   user_id: number;
 
-  fullname: string;
+  fullName: string;
 
   email: string;
 
@@ -39,7 +39,7 @@ export class OrderDTO {
   constructor(data: any) {
     this.order_id = data.order_id;
     this.user_id = data.user_id;
-    this.fullname = data.fullname;
+    this.fullName = data.fullName;
     this.email = data.email;
     this.status = data.status;
     this.phone_number = data.phone_number;

@@ -16,19 +16,19 @@
           THÔNG TIN ĐẶT HÀNG
         </h2>
         <div class="mb-3">
-          <label for="fullname" class="form-label">Họ và Tên</label>
+          <label for="fullName" class="form-label">Họ và Tên</label>
           <input
             type="text"
-            formControlName="fullname"
+            formControlName="fullName"
             class="form-control"
-            id="fullname"
+            id="fullName"
             [class.is-invalid]="
-              orderForm.get('fullname')!.invalid &&
-              orderForm.get('fullname')!.touched
+              orderForm.get('fullName')!.invalid &&
+              orderForm.get('fullName')!.touched
             "
           />
-          @if(orderForm.get('fullname')!.invalid &&
-          orderForm.get('fullname')!.touched) {
+          @if(orderForm.get('fullName')!.invalid &&
+          orderForm.get('fullName')!.touched) {
           <div class="invalid-feedback">Full name is required.</div>
           }
         </div>

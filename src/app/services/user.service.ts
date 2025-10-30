@@ -114,8 +114,8 @@ export class UserService {
   }
 
   // Hàm lấy danh sách tất cả user
-  getAllUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${environment.apiBaseUrl}/users/all`);
+  getAllUsers(): Observable<UserResponse[]> {
+    return this.http.get<UserResponse[]>(`${environment.apiBaseUrl}/users/all`);
   }
   // Đếm số lượng user
   countUsers(): Observable<number> {

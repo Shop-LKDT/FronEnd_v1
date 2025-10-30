@@ -7,7 +7,7 @@ import {
 
 export class RegisterDTO {
     @IsString()
-    fullname: string;
+    fullName: string;
 
     @IsPhoneNumber()
     phone_number: string;
@@ -33,7 +33,7 @@ export class RegisterDTO {
     google_account_id: number = 0;
     role_id: number = 1;
     constructor(data: any) {
-        this.fullname = data.fullname;
+        this.fullName = data.fullName;
         this.phone_number = data.phone_number;
         this.address = data.address;
         this.password = data.password;

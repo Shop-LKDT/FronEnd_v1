@@ -3,11 +3,14 @@ import { UserResponse } from './../../../responses/user/user.response';
 import { UserService } from './../../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../../../services/order.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-card-profile',
   standalone: true,
-  imports: [],
+  imports: [
+    RouterModule
+  ],
   templateUrl: './card-profile.component.html',
   styleUrl: './card-profile.component.scss'
 })

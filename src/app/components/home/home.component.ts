@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit {
   userResponse?:UserResponse | null;
   isPopoverOpen = false;
   registerDto: RegisterDTO = {
-    fullname : '',
+    fullName : '',
     phone_number : '',
     password : 'aaaaaaaaaaaaaaaaa',
     retype_password : 'aaaaaaaaaaaaaaaaa',
@@ -74,7 +74,7 @@ export class HomeComponent implements OnInit {
   categories: Category[] = []; // Dữ liệu động từ categoryService
   selectedCategoryId: number  = 0; // Giá trị category được chọn
   currentPage: number = 0;
-  itemsPerPage: number = 40;
+  itemsPerPage: number = 500;
   pages: number[] = [];
   totalPages:number = 0;
   visiblePages: number[] = [];
@@ -102,7 +102,7 @@ export class HomeComponent implements OnInit {
       this.currentPage = Number(this.localStorage?.getItem('currentProductPage')) || 0;
       this.getProducts(this.keyword, this.selectedCategoryId, this.currentPage, this.itemsPerPage);
       this.getCategories(0, 100);
-      console.log("104"+this.userResponse?.fullname);
+      console.log("104"+this.userResponse?.fullName);
       this.route.queryParams.subscribe(params => {
         this.idEmail = params['id'];
         this.typeRequest = params['type'];
@@ -118,7 +118,7 @@ export class HomeComponent implements OnInit {
           next: (response: any) =>{
             this.avatar = response.picture;
             this.registerDto.email = response.email;
-            this.registerDto.fullname = response.name;
+            this.registerDto.fullName = response.name;
             this.registerDto.date_of_birth = response.date_of_birth;
             // this.registerDto.password = this.userProfileForm.get('password')?.value;
             // this.registerDto.address = this.userProfileForm.get('address')?.value;
