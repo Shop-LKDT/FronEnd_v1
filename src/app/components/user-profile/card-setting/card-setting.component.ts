@@ -34,7 +34,7 @@ export class CardSettingComponent implements OnInit {
   ) {
     this.userProfileForm = this.formBuilder.group(
       {
-        fullname: [''],
+        fullName: [''],
         email: ['', [Validators.email]],
         phone_number: ['', Validators.minLength(6)],
         password: ['', Validators.minLength(3)],
@@ -49,9 +49,9 @@ export class CardSettingComponent implements OnInit {
     this.token = this.tokenService.getToken();
     this.getCurrentUser();
     this.userProfileForm.patchValue({
-      fullname: this.userResponse?.fullname ?? '',
+      fullName: this.userResponse?.fullName ?? '',
       address: this.userResponse?.address ?? '',
-      date_of_birth: this.userResponse?.date_of_birth
+      date_of_birth: this.userResponse?.dateOfBirth
         .toISOString()
         .substring(0, 10),
     });
@@ -64,7 +64,7 @@ export class CardSettingComponent implements OnInit {
     debugger;
     if (this.userProfileForm.valid) {
       const updateUserDTO: UpdateUserDTO = {
-        fullname: this.userProfileForm.get('fullname')?.value,
+        fullName: this.userProfileForm.get('fullName')?.value,
         address: this.userProfileForm.get('address')?.value,
         password: this.userProfileForm.get('password')?.value,
         retype_password: this.userProfileForm.get('retype_password')?.value,

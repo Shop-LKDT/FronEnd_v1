@@ -9,6 +9,7 @@ import { DOCUMENT } from '@angular/common';
 import { RouterModule } from "@angular/router";
 import { ApiResponse } from '../../../responses/api.response';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { User } from '../../../models/user';
 
 @Component({
   selector: 'app-user.admin',    
@@ -42,23 +43,23 @@ export class UserAdminComponent implements OnInit{
   }
   ngOnInit(): void {
     this.currentPage = Number(this.localStorage?.getItem('currentUserAdminPage')) || 0;
-    this.getUsers(this.keyword, this.currentPage, this.itemsPerPage);
+    this.getUsers();
+    console.log('ịdijdi',this.users)
   }
   
   searchUsers() {
     this.currentPage = 0;
     this.itemsPerPage = 12;
-    this.getUsers(this.keyword.trim(), this.currentPage, this.itemsPerPage);
+    this.getUsers();
   }
   
-  getUsers(keyword: string, page: number, limit: number) {
-    this.userService.getUsers({ keyword, page, limit }).subscribe({      
-      next: (apiResponse: ApiResponse) => {        
+  getUsers() {
+    this.userService.getAllUsers().subscribe({      
+      next: (apiResponse: UserResponse[]) => {
+        console.log('apiResponse', apiResponse);        
         
-        const response = apiResponse.data
-        this.users = response.users;
-        this.totalPages = response.totalPages;
-        this.visiblePages = this.generateVisiblePageArray(this.currentPage, this.totalPages);
+        this.users = apiResponse;
+        console.log('users', this.users);
       },
       complete: () => {
         // Handle complete event
@@ -74,7 +75,7 @@ export class UserAdminComponent implements OnInit{
   onPageChange(page: number) {
     this.currentPage = page < 0 ? 0 : page;
     this.localStorage?.setItem('currentUserAdminPage', String(this.currentPage));
-    this.getUsers(this.keyword, this.currentPage, this.itemsPerPage);
+    this.getUsers();
   }
   
     generateVisiblePageArray(currentPage: number, totalPages: number): number[] {
@@ -123,7 +124,7 @@ export class UserAdminComponent implements OnInit{
   
     toggleUserStatus(user: UserResponse) {
       let confirmation: boolean;
-      if (user.is_active) {
+      if (user.active) {
         confirmation = window.confirm('Are you sure you want to block this user?');
       } else {
         confirmation = window.confirm('Are you sure you want to enable this user?');
@@ -132,7 +133,7 @@ export class UserAdminComponent implements OnInit{
       if (confirmation) {
         const params = {
           userId: user.id,
-          enable: !user.is_active
+          enable: !user.active
         };
     
         this.userService.toggleUserStatus(params).subscribe({

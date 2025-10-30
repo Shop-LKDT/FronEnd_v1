@@ -3,7 +3,7 @@ import { OrderDetail } from "../../models/order.detail";
 export interface OrderResponse {
     id: number;
     user_id: number;
-    fullname: string;
+    fullName: string;
     email: string;
     phone_number: string;
     address: string;

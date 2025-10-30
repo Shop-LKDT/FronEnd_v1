@@ -2,7 +2,7 @@ import {OrderDetail} from './order.detail'
 export interface Order {
     id: number;
     user_id: number;
-    fullname: string; 
+    fullName: string; 
     email: string;
     phone_number: string; 
     address: string;

@@ -66,7 +66,7 @@ export class RegisterComponent {
     
     
     const registerDTO:RegisterDTO = {
-        "fullname": this.fullName,
+        "fullName": this.fullName,
         "phone_number": this.phoneNumber,
         "address": this.address,
         "password": this.password,

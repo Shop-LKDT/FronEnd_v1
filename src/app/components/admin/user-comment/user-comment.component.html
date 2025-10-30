@@ -35,7 +35,7 @@
     <tbody>
       <tr *ngFor="let cmt of comments">
         <td>{{ cmt.user.id }}</td>
-        <td>{{ cmt.user.fullname }}</td>
+        <td>{{ cmt.user.fullName }}</td>
         <td>{{ cmt.user.phone_number }}</td>
         <td>{{ cmt.user.address }}</td>
         <td>{{ cmt.user.date_of_birth | date:'shortDate' }}</td> <!-- Sử dụng pipe date để định dạng -->

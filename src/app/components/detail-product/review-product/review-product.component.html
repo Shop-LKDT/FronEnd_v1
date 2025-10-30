@@ -68,7 +68,7 @@
                   src="https://th.bing.com/th/id/OIP.ItvA9eX1ZIYT8NHePqeuCgHaHa?rs=1&pid=ImgDetMain"
                   alt="User Avatar"
                 />
-                <span class="username">{{ review.user.fullname }}</span> <span class="commentDate">{{ review.created_at | date:'shortDate' }}</span>
+                <span class="username">{{ review.user.fullName }}</span> <span class="commentDate">{{ review.created_at | date:'shortDate' }}</span>
               </div>
               <div class="rating">
                 <span *ngFor="let _ of [].constructor(review.ratting)">

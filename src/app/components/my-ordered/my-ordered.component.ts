@@ -33,7 +33,7 @@ export class MyOrderedComponent {
     address: string;
     cart_items: [];
     email: string;
-    fullname: string;
+    fullName: string;
     payment_method: string;
     phone_number: string;
     shipping_method: string;

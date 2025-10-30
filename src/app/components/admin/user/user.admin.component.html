@@ -1,41 +1,69 @@
-<h1 class="text-3xl font-bold text-center mb-6">Quản lý người dùng</h1>
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
+  <h1 class="text-4xl font-extrabold text-gray-800 text-center mb-10">
+    Quản lý người dùng
+  </h1>
 
-<div class="container mx-auto px-6 py-8">
   <!-- Card Container -->
-  <div class="bg-dark-purple p-6 rounded-xl text-white shadow-lg">
+  <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-xl border border-gray-100">
 
     <!-- Table Section -->
-    <div class="shadow-lg rounded-3xl bg-white p-8">
-      <table class="table table-bordered table-striped">
-        <thead class="bg-gray-700">
+    <div class="overflow-x-auto rounded-xl border border-gray-200">
+      <table class="min-w-full divide-y divide-gray-200">
+        
+        <!-- Table Header -->
+        <thead class="bg-indigo-600">
           <tr>
-            <th class="px-4 py-2 text-gray-300 text-center">Mã người dùng</th>
-            <th class="px-4 py-2 text-gray-300 text-center">Tên người dùng</th>
-            <th class="px-4 py-2 text-gray-300 text-center">Số điện thoại</th>
-            <th class="px-4 py-2 text-gray-300 text-center">Địa chỉ</th>
-            <th class="px-4 py-2 text-gray-300 text-center">Trạng thái</th>
-            <th class="px-4 py-2 text-gray-300 text-center">Quyền</th>
-            <th class="px-4 py-2 text-gray-300 text-center">Thao tác</th>
+            <th class="p-4 text-white text-sm font-semibold tracking-wider text-left rounded-tl-xl">Mã người dùng</th>
+            <th class="p-4 text-white text-sm font-semibold tracking-wider text-left">Tên người dùng</th>
+            <th class="p-4 text-white text-sm font-semibold tracking-wider text-left">Số điện thoại</th>
+            <th class="p-4 text-white text-sm font-semibold tracking-wider text-left">Địa chỉ</th>
+            <th class="p-4 text-white text-sm font-semibold tracking-wider text-center">Trạng thái</th>
+            <th class="p-4 text-white text-sm font-semibold tracking-wider text-center">Quyền</th>
+            <th class="p-4 text-white text-sm font-semibold tracking-wider text-center rounded-tr-xl">Thao tác</th>
           </tr>
         </thead>
-        <tbody>
+        
+        <!-- Table Body -->
+        <tbody class="bg-white divide-y divide-gray-100">
           @for(user of users; track user.id) {
-            <tr class="cursor-pointer transition ease-in-out hover:bg-gray-100">
-              <td class="border px-4 py-2 text-center">{{ user.id }}</td>
-              <td class="border px-4 py-2 text-center">{{ user.fullname }}</td>
-              <td class="border px-4 py-2">{{ user.phone_number }}</td>
-              <td class="border px-4 py-2">{{ user.address }}</td>
-              <td class="border px-4 py-2 text-center">{{ user.is_active ? 'Active' : 'Inactive' }}</td>
-              <td class="border px-4 py-2 text-center">{{ user.role.name }}</td>
-              <td class="border px-4 py-2 text-center">
+            <tr class="transition-colors duration-200 hover:bg-indigo-50/50">
+              <td class="p-4 whitespace-nowrap text-sm text-gray-700 font-medium">{{ user.id }}</td>
+              <td class="p-4 whitespace-nowrap text-sm text-gray-700">{{ user.fullName }}</td>
+              <td class="p-4 whitespace-nowrap text-sm text-gray-700">{{ user.phoneNumber }}</td>
+              <td class="p-4 text-sm text-gray-700 max-w-xs truncate">{{ user.address }}</td>
+              
+              <!-- Status Badge -->
+              <td class="p-4 whitespace-nowrap text-center">
+                <!-- Dùng [ngClass] hoặc class binding nếu đây là Angular component để thay đổi màu sắc động -->
+                <span 
+                  class="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium"
+                  [ngClass]="user.active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'">
+                  {{ user.active ? 'Hoạt động' : 'Đã khóa' }}
+                </span>
+              </td>
+              
+              <td class="p-4 whitespace-nowrap text-sm text-gray-700 text-center">{{ user.role.name }}</td>
+              
+              <!-- Action Buttons -->
+              <td class="p-4 whitespace-nowrap text-center space-x-2">
+                
                 <!-- Toggle User Status Button -->
-                <button class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 transition ease-in-out" (click)="toggleUserStatus(user)">
-                  <i class="fas fa-ban"></i>
+                <button 
+                  title="{{ user.active ? 'Khóa người dùng' : 'Kích hoạt người dùng' }}"
+                  class="p-2 rounded-full shadow-md transition-colors duration-200" 
+                  [ngClass]="user.active ? 'bg-red-500 hover:bg-red-600 text-white' : 'bg-green-500 hover:bg-green-600 text-white'"
+                  (click)="toggleUserStatus(user)">
+                  <i class="fas fa-exchange-alt"></i> <!-- Icon chuyển đổi trạng thái -->
                 </button>
-                <!-- Reset Password Button (commented out) -->
-                <!-- <button class="bg-blue-500 text-white font-bold py-1 px-3 rounded ml-2 hover:bg-blue-700 transition ease-in-out" (click)="resetPassword(user.id)">
-                  Reset Password
-                </button> -->
+                
+                <!-- Edit Button (Thêm vào để dễ thao tác hơn) -->
+                <button 
+                  title="Chỉnh sửa thông tin"
+                  class="bg-indigo-500 text-white p-2 rounded-full hover:bg-indigo-600 shadow-md transition-colors duration-200" 
+                  (click)="updateUser(user.id)">
+                  <i class="fas fa-pencil-alt"></i>
+                </button>
+
               </td>
             </tr>
           }

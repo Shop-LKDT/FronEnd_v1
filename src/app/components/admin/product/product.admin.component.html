@@ -1,97 +1,163 @@
-<h1 class="text-3xl font-bold text-center mb-6 text-[#5b5d8f]">Danh Sách Sản Phẩm</h1>
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
+  <h1 class="text-4xl font-extrabold text-gray-900 text-center mb-10">Danh Sách Sản Phẩm</h1>
 
-<div class="mx-auto px-4">
-  <!-- Search Section -->
-  <div class="flex justify-center mb-4 mt-5">
-    <div class="w-full md:w-8/12 px-2 mx-auto">
-      <input
-        class="search-input shadow rounded-lg w-full py-3 px-5 leading-tight focus:outline-none focus:ring-2 focus:ring-gold"
-        type="text" placeholder="Tìm Kiếm Sản Phẩm" [(ngModel)]="keyword">
+  <!-- Top Action & Search Bar Section -->
+  <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-8">
+    <!-- Add Product Button (Nổi bật, đặt ở bên phải hoặc độc lập) -->
+    <div class="order-1 sm:order-2 w-full sm:w-auto">
+      <button
+        class="bg-indigo-600 text-white font-semibold py-3 px-6 rounded-xl shadow-md hover:bg-indigo-700 transition duration-300 w-full sm:w-auto flex items-center justify-center space-x-2"
+        (click)="insertProduct()"
+      >
+        <i class="fas fa-plus-circle"></i>
+        <span>Thêm Sản Phẩm</span>
+      </button>
     </div>
-    <div class="w-full md:w-4/12 px-2">
-      <button class="search-button text-white font-semibold py-3 px-6 rounded-lg"
-        (click)="searchProducts()"><i class="fa fa-search"></i></button>
+
+    <!-- Search Input -->
+    <div class="order-2 sm:order-1 w-full sm:w-2/3">
+      <div class="relative">
+        <input
+          class="shadow-md rounded-xl w-full py-3 pl-12 pr-5 leading-tight text-gray-700 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition duration-200"
+          type="text"
+          placeholder="Tìm Kiếm Sản Phẩm theo Tên/ID..."
+          [(ngModel)]="keyword"
+        />
+        <i
+          class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
+        ></i>
+      </div>
     </div>
   </div>
 
-  <!-- Add Product Button -->
-  <div class="d-flex justify-content-center mb-4">
-    <button class="btn rounded-lg shadow-md hover:bg-gray-600 transition duration-300 ease-in-out px-4 py-2"
-      style="font-size: 15px; background: #5b5d8f; color: white; border: 1px solid #4B5563;" (click)="insertProduct()">
-      Thêm Sản Phẩm
-    </button>
-  </div>
+  <!-- Product Table Container (The main card) -->
+  <div class="bg-white p-2 sm:p-4 rounded-2xl shadow-xl border border-gray-100">
+    <div class="overflow-x-auto rounded-xl border border-gray-200">
+      <table class="min-w-full divide-y divide-gray-200">
+        <!-- Table Header -->
+        <thead class="bg-indigo-600">
+          <tr>
+            <th
+              class="px-4 py-3 text-white text-xs font-semibold tracking-wider text-left rounded-tl-xl"
+            >
+              ID
+            </th>
+            <th class="px-4 py-3 text-white text-xs font-semibold tracking-wider text-left">
+              Tên Sản Phẩm
+            </th>
+            <th class="px-4 py-3 text-white text-xs font-semibold tracking-wider text-center">
+              Hình ảnh
+            </th>
+            <th class="px-4 py-3 text-white text-xs font-semibold tracking-wider text-right">
+              Giá
+            </th>
+            <th
+              class="px-4 py-3 text-white text-xs font-semibold tracking-wider text-center rounded-tr-xl"
+            >
+              Thao Tác
+            </th>
+          </tr>
+        </thead>
 
-  <!-- Product Table -->
-  <div class="shadow-lg rounded-3xl bg-white p-8">
-    <table class="table table-bordered table-striped">
-      <thead class="bg-gray-700 text-white">
-        <tr>
-          <th class="py-3 px-4 font-semibold">ID</th>
-          <th class="py-3 px-4 font-semibold">Tên Sản Phẩm</th>
-          <th class="py-3 px-4 font-semibold">Giá</th>
-          <th class="py-3 px-4 font-semibold">Hình ảnh</th>
-          <th class="py-3 px-4 font-semibold">Thao Tác</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for(product of products; track product.id) {
-          <tr class="cursor-pointer transition ease-in-out hover:bg-gray-100">
-            <td class="px-4 py-2">{{ product.id }}</td>
-            <td class="px-4 py-2">{{ product.name }}</td>
-            <td class="px-4 py-2">{{ product.price | number: '1.0-2' }}</td>
-            <td class="px-4 py-2">
-              <img src="{{ product.url }}" class="rounded-square" alt="Thumbnail" width="100" height="100">
+        <!-- Table Body -->
+        <tbody class="bg-white divide-y divide-gray-100">
+          @for(product of products; track product.id) {
+          <tr class="transition-colors duration-150 hover:bg-indigo-50/50">
+            <td class="p-4 whitespace-nowrap text-sm font-medium text-gray-800">
+              {{ product.id }}
             </td>
-            <td class="px-4 py-2">
-              <div class="flex gap-2 justify-center">
-                <button class="bg-blue-600 text-white px-2 py-1 rounded hover:bg-blue-700"
-                  (click)="updateProduct(product.id)">
-                  Cập Nhật
-                </button>
-                <button class="bg-red-600 text-white px-2 py-1 rounded hover:bg-red-700"
-                  (click)="deleteProduct(product)"><i class="fa-solid fa-trash"></i>
-                </button>
-              </div>
+            <td class="p-4 text-sm text-gray-700 font-medium max-w-sm">{{ product.name }}</td>
+
+            <!-- Image -->
+            <td class="p-4 whitespace-nowrap text-center">
+              <img
+                [src]="product.url"
+                class="w-16 h-16 object-cover rounded-md shadow-sm mx-auto"
+                alt="Product Thumbnail"
+              />
+            </td>
+
+            <!-- Price -->
+            <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-800 text-right">
+              {{ product.price | number : '1.0-0' }} VNĐ
+            </td>
+
+            <!-- Action Buttons -->
+            <td class="p-4 whitespace-nowrap text-center space-x-2">
+              <!-- Update Button (Icon) -->
+              <button
+                title="Cập nhật sản phẩm"
+                class="p-2 rounded-full bg-blue-500 text-white hover:bg-blue-600 shadow-md transition-colors duration-200"
+                (click)="updateProduct(product.id)"
+              >
+                <i class="fas fa-pencil-alt"></i>
+              </button>
+
+              <!-- Delete Button (Icon) -->
+              <button
+                title="Xóa sản phẩm"
+                class="p-2 rounded-full bg-red-500 text-white hover:bg-red-600 shadow-md transition-colors duration-200"
+                (click)="deleteProduct(product)"
+              >
+                <i class="fas fa-trash-alt"></i>
+              </button>
             </td>
           </tr>
-        }
-      </tbody>
-    </table>
+          }
+        </tbody>
+      </table>
+    </div>
   </div>
 
-  <!-- Pagination -->
-  <div class="d-flex justify-content-center mt-4">
-    <nav aria-label="Page navigation">
-      <ul class="pagination">
-        @if(currentPage > 0) {
-          <li class="page-item">
-            <a class="page-link" (click)="onPageChange(0)">Đầu</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" (click)="onPageChange(currentPage - 1)">
-              <i class="fa fa-chevron-left"></i>
-            </a>
-          </li>
-        }
-        @for(page of visiblePages; track page) {
-          <ng-container>
-            <li class="page-item" [ngClass]="{'active': page === currentPage + 1}">
-              <a class="page-link" (click)="onPageChange(page - 1)">{{ page }}</a>
-            </li>
-          </ng-container>
-        }
-        @if(currentPage < totalPages - 1) {
-          <li class="page-item">
-            <a class="page-link" (click)="onPageChange(currentPage + 1)">
-              <i class="fa fa-chevron-right"></i>
-            </a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" (click)="onPageChange(totalPages - 1)">Cuối</a>
-          </li>
-        }
-      </ul>
+  <!-- Pagination (Tailwind CSS style) -->
+  <div class="flex justify-center mt-8">
+    <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+      <!-- First/Previous Buttons -->
+      @if(currentPage > 0) {
+      <button
+        class="relative inline-flex items-center px-3 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+        (click)="onPageChange(0)"
+      >
+        <i class="fas fa-angle-double-left"></i>
+      </button>
+      <button
+        class="relative inline-flex items-center px-3 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+        (click)="onPageChange(currentPage - 1)"
+      >
+        <i class="fas fa-angle-left"></i>
+      </button>
+      }
+
+      <!-- Page Numbers -->
+      @for(page of visiblePages; track page) {
+      <button
+        class="relative inline-flex items-center px-4 py-2 border text-sm font-medium transition duration-150"
+        [ngClass]="
+          page === currentPage + 1
+            ? 'z-10 bg-indigo-50 border-indigo-500 text-indigo-600'
+            : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-50'
+        "
+        (click)="onPageChange(page - 1)"
+      >
+        {{ page }}
+      </button>
+      }
+
+      <!-- Next/Last Buttons -->
+      @if(currentPage < totalPages - 1) {
+      <button
+        class="relative inline-flex items-center px-3 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+        (click)="onPageChange(currentPage + 1)"
+      >
+        <i class="fas fa-angle-right"></i>
+      </button>
+      <button
+        class="relative inline-flex items-center px-3 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+        (click)="onPageChange(totalPages - 1)"
+      >
+        <i class="fas fa-angle-double-right"></i>
+      </button>
+      }
     </nav>
   </div>
 </div>
