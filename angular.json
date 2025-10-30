@@ -27,8 +27,7 @@
             "styles": [
               "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "src/styles.scss",
-              "node_modules/font-awesome/css/font-awesome.min.css",
-              "node_modules/leaflet/dist/leaflet.css"
+              "node_modules/font-awesome/css/font-awesome.min.css"
             ],
             "scripts": [],
             "server": "src/main.server.ts",
@@ -36,10 +35,7 @@
             "ssr": {
               "entry": "server.ts"
             },
-            "allowedCommonJsDependencies": [
-              "leaflet",
-              "leaflet-routing-machine"
-            ]
+            "allowedCommonJsDependencies": []
           },
           "configurations": {
             "production": {
